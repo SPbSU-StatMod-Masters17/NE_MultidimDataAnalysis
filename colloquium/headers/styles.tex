@@ -8,16 +8,21 @@
 % \setmathfont{xits-math.otf}
 \ifxetex
 \defaultfontfeatures{Ligatures={TeX},Renderer=Basic}
-\setromanfont[Ligatures={TeX,Historic}]{Times New Roman}
-\setsansfont[Ligatures={TeX,Historic}]{Arial}
-\newfontfamily\cyrillicfont{Arial}
-\setmainfont[Ligatures={TeX,Historic}]{Times New Roman}
-\newfontfamily\cyrillicfont{Times New Roman}
-\setmonofont[Color={0019D4}]{Courier New}
-\newfontfamily{\cyrillicfonttt}{Courier New}
-%%% Кодировки и шрифты %%%
+\usepackage{libertine}
+\setmainfont[
+  Ligatures=TeX,
+  Extension         = .otf,
+  BoldFont          = LinLibertine_RZ,
+  ItalicFont        = LinLibertine_RI,
+  BoldItalicFont    = LinLibertine_RZI,
+]{LinLibertine_R}
 \setdefaultlanguage{russian}  %% устанавливает главный язык документа
 \setotherlanguage{english}
+\setmathfont{xits-math.otf}
+\setmathfont[range={\mathcal,\mathbfcal},StylisticSet=1]{xits-math.otf}
+%\setmathfont[range=\mathbb]{xits-mathbold.otf}   
+%\setmathfont{latinmodern-math.otf}
+%\setmathfont{xits-math.otf}
 \else
 \fi
 

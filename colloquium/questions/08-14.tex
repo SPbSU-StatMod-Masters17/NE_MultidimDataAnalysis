@@ -1,0 +1,208 @@
+\subsection{Билет 8. Сингулярное разложение. В каком смысле оно единственно.}
+
+\begin{design}[1]
+$\sqrt{\lambda_i}$ --- сингулярные числа
+\end{design}
+\begin{design}[2]
+$U_i$ --- левые сингулярные вектора
+\end{design}
+\begin{design}[3]
+$V_i$ --- правые сингулярные вектора
+\end{design}
+
+Пусть $\mathbb{Y} = \sum \limits_{i = 1}^d \sqrt{\lambda_i} U_i V_i^{\mathrm{T}}$.
+
+Если сделать замену сингулярной тройки $(\sqrt{\lambda_i}, U_i, V_i)$ на $(\sqrt{\lambda_i}, -U_i, -V_i)$, то разложение $\sqrt{\lambda_i} U_i V_i^{\mathrm{T}}$ не поменяется.
+
+Пусть $\lambda_1 = \lambda_2 > \lambda_3$. Тогда $\forall$ $U \in span(U_1, U_2)$ --- тоже сингулярный вектор, соответствующий $\lambda_1 = \lambda_2$. Таким образом, $U_1, U_2$ можно заменить на $\forall$ ортонормированные вектора из $span(U_1,U_2)$.
+
+\begin{sug}
+Пусть $\mathbb{Y} = \sum \limits_{i = 1}^L c_i P_i Q_i^{\mathrm{T}}, c_1 \geqslant c_2 \geqslant \dots \geqslant 0$, при этом $\{P_i\}$ и $\{Q_i\}$ --- ортонормированные, тогда разложение $\mathbb{Y}$ --- SVD.
+\end{sug}
+
+Без доказательства.
+
+\begin{note}
+Как только имеет место биортогональность --- тогда SVD.
+\end{note}
+
+
+\subsection{Билет 9. Разложение Шмидта}
+
+Пусть $(D_1, \mathfrak{A}_1, \mu_1)$, $(D_2, \mathfrak{A}_2, \mu_2)$ --- измеримые пространства с мерой. Введем гильбертово пространство вещественных функций $f^2 \in L_2 \leftrightarrow \int \limits_{D} |f|^2 d\mu$
+
+\begin{equation*}
+L_i^2 = L^2(D_i,\mu_i), i = 1,2
+\end{equation*}
+
+\begin{equation*}
+L_{1,2}^2 = L^2(D_1 \times D_2,\mu_1 \bigotimes \mu_2), <\cdot,\cdot>_{1,2},  ||\cdot||
+\end{equation*}
+
+$g$ --- ядро интегрального оператора. $G: L_2^2 \longrightarrow L_1^2$\\
+
+Оператор Гильберта--Шмидта: $Gh = \int \limits_{D_2} g(\cdot,s) h(s) \mu_2(ds)$\\
+
+\underline{Сопряженный оператор:} $G^{*}: L_1^2 \longrightarrow L_2^2$; \\
+$G^{*} = \int \limits_{D_2}	g(x,\cdot) f(x) \mu_1(dx)$\\
+$< f, Gh > = < G^{*}f, h >$\\
+
+\underline{Самосопряженный оператор:} $GG^{*}: L_1^2 \longrightarrow L_1^2$ и $G^{*}G: L_2^2 \longrightarrow L_2^2$ с ядрами:\\
+$g_{22}(u,v) = \int \limits_{D_1} g(x,u) g(x,v) \mu_1(dx)$\\
+$g_{11}(x,y) = \int \limits_{D_2} g(x,s) g(y,s) \mu_2(ds)$\\
+
+\begin{thm}
+\begin{enumerate}
+\item $GG^{*}$ имеет $\geqslant 1$ ненулевых собственных чисел
+\item $GG^{*}$ имеет н.б.ч.с. число ненулевых вещественных положительных собственных чисел конечной кратности. 
+\end{enumerate}
+\end{thm}
+Без доказательства.
+
+\begin{prop}[1]
+Пусть $\{\lambda_n\}, n \geqslant 1$ --- положительные собственные числа $GG^{*}$, $\{\phi_n\}$ --- соответствующие собственные функции.\\
+Тогда $\{\phi_n\}$ --- ортонормированная система в $L_1^2$. И если $\phi \perp \phi_n \forall n$, тогда $\phi$ соответствует с. ч. $\lambda = 0$ на $GG^{*}$
+\end{prop}
+\begin{prop}[2]
+Пусть $\psi_n = \frac{G^{*}\phi_n}{\sqrt{\lambda_n}}$, тогда $\{\psi_n\}$ --- ортонормированная система в $L_2^2$.
+Если $\psi \perp \psi_n \forall n$, то $\psi$ соответствует нулевому собственному числу $G^{*}G$
+\end{prop}
+\begin{prop}[3]
+$\phi_n = \frac{G\psi_n}{\sqrt{\lambda_n}}$
+\end{prop} 
+
+\underline{Разложение Шмидта функции $g$:}
+
+$g(\cdot,x) = \sum \limits_{n} \sqrt{\lambda_n} \phi_n (\cdot) \bigotimes \psi_n (\cdot) \forall g \in L_{1,2}^2 \Rightarrow ||g||_{1,2}^2 = \sum \limits_{n} \lambda_n < +\infty$
+
+\subsection{Билет 10. Выборочный анализ главных компонент и сингулярное разложение, общее и различия.}
+
+\underline{Разложение Шмидта функции $g$:}
+
+$g(\cdot,x) = \sum \limits_{n} \sqrt{\lambda_n} \phi_n (\cdot) \bigotimes \psi_n (\cdot) \forall g \in L_{1,2}^2 \Rightarrow ||g||_{1,2}^2 = \sum \limits_{n} \lambda_n < +\infty$
+
+
+
+\subsubsection{Сингулярное разложение}
+
+$g(\cdot , \cdot) \leftrightarrow Y_{ij}$\\
+$g \leftrightarrow \mathbb{Y}$\\
+
+$D_1 = \{1, \dots, L\}$, $\mu_1$ --- считающая мера\\
+$D_2 = \{1, \dots, K\}$, $\mu_2$ --- считающая мера\\
+
+$g \leftrightarrow \mathbb{Y}\mathbb{Y}^{\mathrm{T}}$
+
+\subsubsection{Выборочный анализ главных компонент}
+
+$\mathbb{X}, \mathbb{Y} = \mathbb{X}^{\mathrm{T}}$\\
+$D_1 = \{1, \dots, L\}$, $\mu_1$ --- считающая мера\\
+$D_2 = \{1, \dots, K\}$, $\mu_2$ --- вероятностная мера такая, что $\mu_2(\{i\}) = \frac{1}{K}$\\
+$||\mathbb{Y}||_{1,2}^2 = \frac{||\mathbb{Y}||_{F}^2}{K}$\\
+Предположим, что $\int \limits_{D_2}g(x,s) \mu_2(ds) = 0$, т.е. признаки $X_i$ --- центрированы.
+
+$g_{11} \leftrightarrow \frac{\mathbb{Y}\mathbb{Y}^{\mathrm{T}}}{K}$ --- выборочная ковариационная матрица.\\
+
+\begin{enumerate}
+\item  $\lambda_i = \frac{\hat{\lambda_i}}{K}$
+\item  $U_i = \hat{U_i}$
+\item  $V_i = \hat{V_i} \sqrt{K}$
+\end{enumerate}
+
+SVD:
+\begin{equation*}
+\mathbb{Y} = \sum \limits_{i} \sqrt{\hat{\lambda_i}} \hat{U_i} \hat{V_i}^{\mathrm{T}}
+\end{equation*}
+
+PCA:
+\begin{equation*}
+\mathbb{Y} = \sum \limits_{i} \sqrt{\lambda_i} U_i V_i^{\mathrm{T}}
+\end{equation*}
+
+\subsection{Билет 11. Анализ главных компонент на генеральном языке как частный случай разложения Шмидта.}
+
+Разложение случайного вектора $\xi = (\xi_1, \dots, \xi_L)^{\mathrm{T}}$.\\
+
+$D_1 = \{1, \dots, L\}$, $\mu_1$ --- считающая мера\\
+$(D_2, \mathfrak{A}_2, \mu_2)$ --- вероятностное пространство
+
+$g(x,s) \leftrightarrow \xi_i(\omega), g \leftrightarrow \xi, x \leftrightarrow i, s \leftrightarrow \omega$\\
+
+$g \in L_{1,2}^2 \Leftrightarrow \sum \limits_{i = 1}^L \mathbb{E}{\xi_i}^2 < \infty$\\
+
+Пусть $\int \limits_{D_2} g(x,s) \mu_2(ds) = 0$, т.е. $\mathbb{E}\xi_i = 0 \forall i$\\
+$g_{11} = \int \limits_{D_2} g(x,s) g(y,s) d\mu_2$\\
+
+Значит $g_{11}(i,j) = \mathbb{E}\xi_i \xi_j = cov(\xi_i, \xi_j)$, т.е. $g_{11}$ --- ковариационная матрица $\{\mathbb{E}\xi_i \xi_j\}_{i,j}$\\
+
+$\lambda_i, U_i (U_i \leftrightarrow \phi_i)$ --- с. ч. и с. в. матрицы вектора $\xi$\\
+$\psi_i \leftrightarrow \epsilon_i$ (белый шум)\\
+
+$\xi(\omega) = \sum \limits_{n} \sqrt{\lambda_n} U_n \epsilon_n (\omega)$
+\subsection{Билет 12. Почему главные компоненты так называются, в каком смысле они главные.}
+
+В силу третьего свойства оптимальности SVD:
+
+Пусть $Y_1, \dots, Y_K \in \mathbb{R}^r$. $P \in \mathbb{R}^L$ задает направление ($|P| = 1$, $P$ --- главное направление, которое задается 1--м с. в.).
+\begin{equation*}
+\sum \limits_{i = 1}^K < Y_i, P >^2 \longrightarrow \max \limits_{P}
+\end{equation*}
+
+\begin{sug}
+\begin{enumerate}
+\item $\max \limits_{P} \sm_{i = 1}^K < Y_i, P >^2 = \lambda_1$, и достигается на $P = U_1$
+\item $\max \limits_{P: P \perp U_j} \sm_{i = 1}^K < Y_i, P >^2 = \lambda_i$, и достигается на $U_i \forall j = 1, \dots, k - 1$, где $U_i$ --- $i$--й главный вектор, задающий $i$--е главное направление
+\end{enumerate}
+\end{sug}
+
+$< Y_j, U_i >$ --- $i$--я главная компонента $j$--го индивида.\\
+\begin{design}
+$Z_i$ --- новые признаки
+\end{design}
+$Z_i = (< Y_1, U_i >, \dots, < Y_k, U_i >)^{\mathrm{T}}$ --- вектор $i$--х главных компонент.\\
+$Z_i = \mathbb{X}U_i = \mathbb{Y}^{\mathrm{T}}U_i = \sqrt{\lambda_i}V_i$\\
+
+\begin{design}
+$V_i$ --- факторный вектор или вектор факторных значений.
+\end{design}
+
+\begin{note}
+
+Если исходные признаки были центрированы ($\mathbb{E}X_i = 0$), то  все остальное тоже будет центрированным ($\mathbb{E}U_i = 0, \mathbb{E}V_i = 0$).
+\end{note}
+
+\begin{design}
+$\{V_i\}_{i = 1}^d$ --- базис пространства признаков.
+\end{design}
+
+$X_i \perp \mathbb{I}, < X_i, \mathbb{I} > = 0 \then \mathbb{E}X_i = 0$\\
+Если $\forall i X_i \perp \mathbb{I} \then$ линейная комбинация $X_i \perp \mathbb{I}$.
+
+\subsection{ Билет 13. Оптимальность сингулярного разложения в смысле аппроксимации матрицей ранга r.}
+
+Пусть \[\mathbb{Y} = \sum_{i=1}^{d}\sqrt{\lambda_i}U_iV_i^{\rm T}\] —- некоторое разложение SVD.
+
+Определим множество матриц $M_r\subset \R^{L\times K}$ ранга $\leq r$.
+
+\begin{sug}
+
+\begin{enumerate}
+\item Аппроксимация матрицей меньшего ранга: $$\min_{\mathbb{Y}\in M_r} ||\mathbb{Y}-\mathbb{\widetilde{Y}}||_F^2=\sum_{i=r+1}^{d}\lambda_i; $$
+\item Минимум достигается на первых $r$ элементах сингулярного разложения:
+\[\mathbb{\widetilde{Y}}_0=\sum_{i=1}^{r} \sqrt{\lambda_i}U_iV_i^{\rm T}.\]
+\end{enumerate}
+\end{sug}
+
+Без доказательства. 
+
+\subsection{ Билет 14. Оптимальность сингулярного разложения в смысле аппроксимации подпространством размерности r}
+
+Пусть $\alpha_r \in \R^{L}$ —- подпространство размерности $r$.
+
+\begin{sug}
+
+\begin{enumerate}
+\item $$\min_{\alpha_r} \sum_{i=1}^{K}dist^2(\mathbb{Y}_i,\alpha_r)=\sum_{i=r+1}^{d}\lambda_i; $$
+\item Минимум достигается на подпространстве натянутом на первые $r$ с. в. ($span(U_1,\ldots , U_r)$).
+\end{enumerate}
+\end{sug}

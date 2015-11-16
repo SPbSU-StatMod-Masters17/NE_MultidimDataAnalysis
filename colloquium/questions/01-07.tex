@@ -1,0 +1,237 @@
+\subsection{Билет 1. Многомерное нормальное распределение. Вектор мат.ож. и ковар.матрица при лин. преобразовании (умножении на матрицу).}
+\paragraph{Нормальное распределение}
+\begin{dfn}
+    \label{dfn::1::mnd1}
+    %Пусть $\mu \in \mathbb R^p$ и $\Sigma \in \mathrm M_{p, p}(\mathbb R)$ 
+    Говорят, что случайный вектор $\mathbb \xi = (\xi_1, \xi_2, \ldots, \xi_p)^\mathrm T$ имеет $p$-мерное нормальное распределение, если %$\mathcal N(\mu, \Sigma)$, если 
+    для любых $\{a_i\}_{i=1}^p \subset \mathbb R$ линейная комбинация $\sum_{i=1}^p a_i \xi_i$ имеет 
+    нормальное распределение.\footnote{Здесь распределение Дирака тоже считаем нормальным.}
+    Если обозначить $\mu = \mathbb E \xi$, $\Sigma = \mathrm{Cov} \xi$, то пишут $\xi \sim \mathcal N(\mu, \Sigma)$.
+\end{dfn}
+\begin{thm}
+    \label{thm::1::mnd2}
+    Пусть $\mu \in \mathbb R^p$ и $\Sigma \in \mathrm M_{p, p}(\mathbb R)$ --- невырожденная матрица.
+    Рассмотрим случайный вектор $\mathbb \xi \sim \mathcal N(\mu, \Sigma)$.
+    Тогда $\mathbb \xi$ имеет плотность:
+    \begin{gather}
+        \label{mnd_dens}
+        p_\mathbb \xi (\mathbf x) = \frac{1}{(2 \pi)^{p/2} \sqrt{\det \Sigma}}
+        e^{-\frac{1}{2} (\mathbf{x} - \mu)^\mathrm T \Sigma^{-1} (\mathbf x - \mu)},
+    \end{gather}
+    для любого $\mathbf x \in \mathbb R^p$.\footnote{Убедитесь, что при $p = 1$ получается одномерная плотность.}
+\end{thm}
+
+Заметим, что в определении \ref{dfn::1::mnd1} не требуется невырожденность ковариационной матрицы $\Sigma$.
+Если же $\Sigma$ вырожденная, то это означает, что распределение сосредоточено на подпространстве в $\mathbb R^p$.\footnote{Чтобы
+    это осознать, представьте себе $\eta \sim \mathcal N(0, 1)$. На каком подпространстве (и как) распределен вектор $(\eta, 0)^\mathrm T$?
+}
+\paragraph{Линейное преобразование}
+\begin{thm}
+Пусть $\xi \sim \mathcal N(\mu, \Sigma)$, где $\mu \in \mathbb R^p$, а $\Sigma \in \mathrm M_{p,p}(\mathbb R)$. Рассмотрим матрицу $\mathbb A \in \mathrm M_{d,p}(\mathbb R)$.
+    Тогда $\mathbb A \xi \sim \mathcal N\left(\mathbb A \mu, \mathbb A \Sigma \mathbb A^\mathrm T\right)$.  \end{thm}
+\begin{proof}
+    Утверждение следует из линейности мат. ожидания и того, что $\mathrm{Cov}(\xi) = \mathbb E(\xi-\mathbb E\xi)(\xi-\mathbb E\xi)^\mathrm T$.\footnote{В
+    одномерном случае это должно совпасть с обычным определением ковариации.}
+\end{proof}
+
+\subsection{Билет 2. Оценки вектора средних и ковар.матрицы. Несмещенная оценка ковар. матрицы.}
+\paragraph{Генеральный язык.}
+
+Пусть дан вектор $\xi = (\xi_1, \ldots, \xi_p)^\mathrm T$. Вектором средних называется $\mathbb E\xi = (\mathbb E\xi_1, \ldots, \mathbb E\xi_n)^\mathrm T$.
+Ковариационная матрица --- $\mathrm{Cov}(\xi) = \mathbb E(\xi-\mathbb E\xi)(\xi-\mathbb E\xi)^\mathrm T$.
+\paragraph{Выборочный язык.}
+
+Генеральную совокупность обозначим $\xi$.
+Рассмотрим $\mathbb X = [X_1\colon\ldots\colon X_p] \in M_{n, p} (\mathbb R)$ --- матрица данных. $X_i$ --- $i$-тый признак. 
+Тогда $\widehat{\mathbb E \xi} = \left(\overline X_1, \ldots, \overline X_p\right)$.
+
+Введем $X_i^{(c)}$--$i$-тый центрированный признак и рассмотрим $\mathbb X^{(c)} = [X_1^{(c)}, \ldots, X_p^{(c)}]$ --- матрицу центрированных данных.
+Тогда $\widehat{\mathrm {Cov}(\xi)} = {\mathbb X^{(c)}}^\mathrm T \mathbb X^{(c)} / n$. В несмещенной оценке ковариационной матрицы знаменатель дроби равен $n-1$.
+
+\textit{Здесь также нужно провести доказательство для дисперсии, что несмещенная оценка является несмещенной. Думаю, что все это уже хорошо умееют делать.}
+
+\subsection{Билет 3. Распределение вектора средних}
+\begin{thm}
+    Пусть дана выборка (на априорном языке) $\mathbf x_1, \ldots, \mathbf x_n \ldots$ c ковариационной матрицей $\Sigma$.
+    Обозначим $\overline{\mathbf x}_n$ --- выборочное среднее первых $n$ индивидов.
+    Тогда для выборочного среднего имеет место следующая (слабая) сходимость:
+    \begin{gather*}
+        \sqrt{n} (\overline{\mathbf{x}}_n - \mu) \to \mathcal N(\mathbbold{0}, \Sigma).
+    \end{gather*}
+
+    Если же $\mathbf x_1, \ldots, \mathbf x_n \sim \mathcal N(\mu, \Sigma)$, то выборочное среднее $\overline{\mathbf x}_n$ имеет распределение $\mathcal N(\mu, \Sigma/n)$.
+\end{thm}
+
+Заметим, что асимптотическая сходимость есть ни что иное, как многомерное обобщение ЦПТ в форме Леви. Все могут вывести из этого обобщения обычную (одномерную) теорему?
+
+\subsection{Билет 4. Переход к новым признакам с помощью ортогональной матрицы. Пример про способности по математике и физике (выписать матрицу вращения)}
+
+\paragraph{Переход к новым признакам.}
+Рассмотрим случайный вектор $\xi \in \mathbb R^p$ и детерминированный вектор $a \in \mathbb R^p$.
+Если $\xi$ рассматривать как набор из $p$ признаков, то $\eta = a^\mathrm T \xi$ --- новый признак.
+
+Рассмотрим же теперь матрицу $\mathbb A = [A_1 \colon \ldots \colon A_d] \in \mathrm M_{p, d}(\mathbb R)$. Тогда $\mathbb A^\mathrm T \xi$ --- набор из новых $d$ признаков.
+
+На выборочном языке то же самое перепишется так:
+$Z = \mathbb X a$ --- для одного признака и $\mathbb Z = [Z_1 \colon \ldots \colon Z_d] = \mathbb {X A} \in \mathrm M_{n, d}(\mathbb R)$ --- для $d$ признаков.
+Заметим, что в последней записи новыми признакими как раз будут являться столбцы $Z_1, \ldots, Z_d$.
+
+\paragraph{Факторы и факторные нагрузки.}
+Пусть задана матрица данных $\mathbb X = [X_1 \colon \ldots \colon X_p] \in \mathrm M_{n, p}(\mathbb R)$. Обозначим $d = \mathrm{rk} (\mathbb X)$.
+Перейдем с помощью матрицы $\mathbb A$ к $d$ ортогональным признакам $\{Z_i\}_{i=1}^d$.
+Формально, это означает, что $\mathbb Z = \mathbb {X A}$, где $\mathbb Z = [Z_1 \colon \ldots \colon Z_d]$ и $Z_i \perp Z_j$ при $i \neq j$.
+С точки зрения линейной алгебры $\{Z_i\}_{i=1}^d$ образуют ортогональный базис в пространстве признаков\footnote{Формально, $\mathrm {span} (X_1, \ldots X_p)$.}.
+
+Превратим этот базис в ортогональный: для всех $i \in 1:d$ положим $Q_i = Z_i / \|Z_i\|$.
+Таким образом, $\{Q_i\}_{i=1}^d$ --- ОН-базис в пространстве признаков.
+Введем матрицу $\mathbb Q = [Q_1 \colon \ldots \colon Q_d] \in \mathbb M_{n,d}(\mathbb R)$.
+
+Разложим исходные признаки по ОН-базису, то есть по всем $j \in 1:p$
+\begin{gather*}
+    X_j = \sum_{k=1}^d f_{jk} Q_k,
+\end{gather*}
+где $f_{jk} = (X_j, Q_k)$ для всех $j \in 1:p$ и $k \in 1:d$.
+Введем матрицу $\mathbb F = [F_1 \colon \ldots \colon F_d]$, где $\left(F_j\right)_i = f_{ij}$. Вектора $Q_\cdot$ называют \textit{факторами},
+а $f_{\cdot \cdot}$ --- \textit{факторными нагрузками}.
+Тогда ясно, что $F_k = \mathbb X^\mathrm T Q_k \in \mathbb R^p$\footnote{Чтобы не запутаться, где тут транспонирование есть один простой трюк.
+    Помните, что вы работаете с признаками! Это же точно столбцы матрицы $\mathbb X$. Интерпретируйте алгебраические преобразования именно как преобразования над
+    признаками. Для формальной проверки достаточно обычно проверить, сходятся ли размерности.}.
+    Но $\mathbb X = \sum_{k=1}^d Q_k (\mathbb X^T Q_k)^\mathrm T$\footnote{Просто разложили элементы пространства по базису, правда?}.
+Следовательно, $\mathbb X = \mathbb Q \mathbb F^\mathrm T$.
+
+\paragraph{Разложение с помощью ортогональных признаков.}
+Итак получено разложение $\mathbb X = \mathbb Q \mathbb F^\mathrm T$, при этом $\mathbb Q^\mathrm T \mathbb Q$ --- единичная матрица порядка $d$.\footnote{Заметим,
+    что $\mathbb Q \mathbb Q^\mathrm T$ не обязано совпадать с единичной матрицей. Разве это удивительно? Вновь, используем язык признаков.
+    Лишь одно из перемножений имеет интерпретируемый смысл.}
+В этом разложении лишь $Q$ задает ОН-базис. Система, заданная столбцами матрицы $\mathbb F$ совершенно не обязана быть нормированной.
+Рассмотрим $P_j = F_j / \|F_j\|$ и положим $\sigma_j = \|F_j\|$. Введем матрицы $\Sigma = \mathrm {diag} (\sigma_1, \sigma_2, \ldots, \sigma_d)$ и
+$\mathbb P = [P_1 \colon \ldots \colon P_d] \in \mathrm M_{n, d}(\mathbb R)$.
+Тогда $\Sigma \mathbb P^\mathrm T = \mathbb F^\mathrm T$.\footnote{Смотрим на это на языке столбцов. Тогда все станет ясно.} 
+А значит $\mathbb X = \mathbb Q \Sigma \mathbb F^\mathrm T$.
+
+C другой стороны, было показано, что $\mathbb X = \sum_{i=1}^d Q_i F_i^\mathrm T = \sum_{i=1}^d \sigma_i Q_i P_i^\mathrm T$.
+
+\bigskip
+
+Обратим внимание, что в получившемся разложении $P_i$, обычно\footnote{\color{blue} Я тут сам не понимаю --- вроде бы в общем случае линейной независимости не от куда взяться}
+не являются ортогональными, а лишь линейно-независимыми. В дальнейшем, утверждается, что единственным биортогональным разложением (то есть таким, когда $P_i$ ортогональны) является SVD.
+
+\begin{ex}
+    Пусть число признаков $p = 2$, то есть $\mathbb X = [X_1 \colon X_2]$. При этом $X_1$ показывает количество баллов по математике, а $X_2$ --- количество баллов по физике.
+    Рассмотрим матрицу поворота:
+    \begin{gather*}
+        \mathbb A = \frac{1}{\sqrt{2}}
+        \begin{pmatrix}
+            1  &  1 \\
+            1  & -1
+        \end{pmatrix}.
+    \end{gather*}
+    Рассмотрим два новых признака $\mathbb Z = [Z_1 \colon Z_2] = \mathbb {X A}$, где $Z_1 = (X_1 + X_2) / \sqrt{2}$ --- отражает общие способности, $Z_2 = (X_1 - X_2) / \sqrt{2}$ --- ``разница'' между способностями по математике и физике.
+    Очень рекомендуется выписать все буковки, которые встречались раньше в этом примере (в частности, матрицу факторных нагрузок).
+\end{ex}
+
+
+\subsection{Билет 5. Разложение матрицы данных при переходе к новым признакам в виде суммы и в матричном виде}
+
+См. предыдущий билет. По всей видимости интересует представление в виде $\mathbb X = \mathbb Q \mathbb F^\mathrm T$.
+Заметим, что справедливо представление $\mathbb X = \sum_{k=1}^d Q_k F_k^\mathrm T$.
+Определим $\mathbb X_k = Q_k F_k^\mathrm T$ для $k \in 1:d$. Ясно, что $\mathrm{rk}(X_k) = 1$.\footnote{Почему все строки (или все столбцы) этой матрицы линейно зависимы?}
+Тогда $\mathbb X = \sum_{k=1}^d \mathbb X_k$.
+
+\subsection{Билет 6. Как определяется вклад новых признаков}
+
+\begin{dfn}
+    Зафиксируем $t, s \in \mathbb N$ (абстрактные). На пространстве $\mathrm M_{t,s} (\mathbb R)$ введем \textit{фробениусово}
+    скалярное произведение: для любых матриц $\mathbb X = \{x_{ij}\}, \mathbb Y = \{y_{ij}\} \in \mathrm M_{t, s} (\mathbb R)$ определим $(\mathbb X, \mathbb Y)_F = \sum_{i,j} x_{ij} y_{ij}$.\footnote{
+    Несложно проверить, что это, действительно, скалярное произведение.}.
+
+    Это скалярное произведение порождает \textit{фробениусову} норму матрицы: \\$\|\mathbb X\| = \sqrt{\sum_{i,j} x_{ij}^2}$\footnote{Кто помнит, кажется, 5тую главу вычей второго курса,
+    знает, что это не самая классная норма, потому что она не подчинена никакой векторной, но для наших целей подходит.}.
+\end{dfn}
+
+
+Вернемся к матрицам $\mathbb X_k$ (cм. билет 5). Если $\mathbb X_i \perp \mathbb X_j$ для неравных $i, j$, то $\mathbb \|X\|^2 = \sum_{k=1}^d \|X_k\|^2$\footnote{Это
+стандартное свойство нормы в гильбертовом пространстве.}.
+Определим вклад $i$-того признака как отношение $\| \mathbb X_i \|^2 / \| \mathbb X \|^2$.
+
+\begin{lem}
+    Пусть $Q_1, Q_2 \in \mathbb R^n$, а $F_1, F_2 \in \mathbb R^p$\footnote{Обозначения выбраны так, чтобы было ясно видно, причем тут матрицы $\mathbb X_k$.}.
+    \begin{gather*}
+        \left(Q_1 F_1^\mathrm T, Q_2 F_2^\mathrm T\right)_F = (Q_1, Q_2) (F_1, F_2).
+    \end{gather*}
+\end{lem}
+Доказательство леммы проводится очень просто, если записать поэлементно, что происходит.
+
+Из этой леммы следует, что для того, чтобы понятие вклада признака имело смысл (то есть чтобы матрицы $\mathbb X_k$ были ортогональны) достаточно ортогональности новых признаков $Q_i$.
+
+\subsection{Билет 7. Сингулярное разложение, как строится}
+
+Пусть дана матрица $\mathbb Y \in \mathrm M_{L, K}(\mathbb R)$, где $L < K$\footnote{Обозначения здесь вводятся с расчетом на Гусеницу в следующем семестре}.
+Рассмотрим матрицу $\mathbb S = \mathbb Y\mathbb Y^\mathrm T \in \mathrm M_{L,L}(\mathbb R)$\footnote{Матрица потом будет обозначать ковариационную, поэтому обозначение правильно ее напоминает.}.
+Эта матрица неотрицательно определена и симметрична. Упорядочим ее собственные числа по невозрастанию: $\lambda_1 \geqslant \lambda_2 \geqslant \ldots \geqslant \lambda_L \geqslant 0$.
+Обозначим $U_i$ --- нормированный собственный вектор соответствующий собственному числу $\lambda_i$ матрицы $\mathbb S$ (по всем $i \in 1:L$).
+Набор $\{U_i\}_{i=1}^L$ образует ОН-базис в $\mathbb R^L$.
+
+Следующее утверждение содержит несколько известных фактов из линейной алгебры (доказывать на коллоквиуме их не нужно).
+\begin{thm}
+    Обозначим $d = \mathrm {rk}(\mathbb S)$\footnote{Именно новое количество признаков всегда записывалось $d$.}.
+    \begin{enumerate}
+        \item $d \leqslant{L, K}$.
+        \item $d = \mathrm{rk}(\mathbb Y \mathbb Y^\mathrm T) = \mathrm{rk}(\mathbb Y^\mathrm T \mathbb Y) = \mathrm{colrank}(\mathbb Y) = \mathrm{rowrank}(\mathbb Y).$
+        \item $\lambda_d > 0$, $\lambda_{d + 1} = 0$.
+        \item $\{U_i\}_{i=1}^d$ --- образует ОН-базис в $\mathrm{colspan}(\mathbb Y)$.
+    \end{enumerate}
+\end{thm}
+
+Следующая теорема играет ключевую роль в первой части.
+\begin{thm}[The SVD]
+    Введем вектора $V_i = \mathbb Y^\mathrm T U_i / \sqrt{\lambda_i}$ для $i \leqslant d$. 
+    \begin{enumerate}
+        \item $\{V_i\}_{i = 1}^d$ --- образуют ОН-базис в $\mathrm{rowspan}(\mathbb Y)$. При этом $\mathbb Y^\mathrm T U_i = \mathbbold{0}$\footnote{\color{blue} Кто-нибудь умеет аккуратно это доказывать?}.
+        \item $V_i$ --- собственный вектор матрицы $\mathbb Y^\mathrm T \mathbb Y$, соответствующий собственному числу $\lambda_i$ (для $i \in 1:d$).
+              Все остальные собственные вектора соответствуют нулевым собственным числам.
+        \item $U_i = \mathbb Y V_i / \sqrt{\lambda_i}$ для $i \leqslant d$.
+        \item $\mathbb Y = \sum_{k = 1}^d \sqrt{\lambda_i} U_i V_i^\mathrm T$ --- The SVD (Singular Value Decomposition, сингулярное разложение). Терминология: $\sqrt{\lambda_i}$ --- сингулярные числа матрицы $Y$,
+              $U_i$ --- левые сингулярные вектора матрицы $\mathbb Y$, $V_i$ --- правые сингулярные вектора матрицы $\mathbb Y$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Пусть $1 \leqslant i, j \leqslant d$. Тогда $(V_i, V_j) = \left(\mathbb Y^\mathrm T U_i, \mathbb Y^\mathrm T U_j\right) / \sqrt{\lambda_i \lambda_j}= \\ =
+              \left(U_i, \mathbb Y \mathbb Y^\mathrm T U_j\right) = \lambda_j (U_i, U_j) \sqrt{\lambda_i \lambda_j} = \delta_{i,j}$.
+        \item То, что $V_i$ --- собственный вектор, соответствующий $\lambda_i$ при $i \leqslant d$ проверяется непосредственно. Докажем, что
+              $V_i$ при $i > d$ соответствуют нулевым собственным числам. Действительно, пусть некоторый вектор $V$ такой, что $V \perp V_i$ для всех $i \leqslant d$.
+              Это означает, что $0 = (\mathbb Y^\mathrm T U_i, V) = (U_i, \mathbb Y U)$ для всех $i \in 1:d$, то есть $\mathbb Y V$ соответствует нулевому собственному числу матрицы $\mathbb Y \mathbb Y^\mathrm T$,
+              а значит по первому пункту\footnote{\color{blue} Здесь пока непонятно.}
+              $\mathbb Y^\mathrm T (\mathbb Y V) =0$.
+        \item Подставьте и все будет хорошо.
+        \item Внешний факт: $\mathbb E_{L} = \sum_{i=1}^L U_i U_i^\mathrm T$\footnote{Такое разложение справедливо для любой ОН-системы.}.
+              Дальше все сводится к простой подстановке, так как $\mathbb Y = \mathbb E_L \mathbb Y$.
+    \end{enumerate}          
+\end{proof}
+
+Заметим, что доказанный факт является очень мощным --- на матрицу $\mathbb Y$ не наложено никаких ограничений!
+SVD является биортогональным разложением матрицы (на самом деле, SVD --- единственное биортогональное разложение).
+
+Перепишем SVD в матричном виде: $\mathbb Y = \mathbb U \Lambda^{1/2} \mathbb V$, где $\mathbb U = [U_1 \colon \ldots U_L]$, $\mathbb V = [V_1 \colon \ldots V_L]$ и
+\begin{gather*}
+    \Lambda = 
+    \begin{pmatrix}
+        \lambda_1 & 0 & 0 &\ldots & 0 & 0 & \ldots & \ldots & 0\\
+        0 & \lambda_2 & 0 &\ldots & 0 & 0 & \ldots & \ldots & 0\\
+        0 & 0 & \lambda_3 &\ldots & 0 & 0 & \ldots & \ldots & 0\\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \ddots & \vdots \\
+        0 & 0 & 0 & \ldots & \lambda_d & 0 &  \ldots & \ldots & 0\\
+        0 & 0 & 0 & \ldots & 0 & 0 &  \ldots & \ldots & 0\\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \vdots & \ddots & \ddots & \vdots \\
+        0 & 0 & 0 & \ldots & 0 & 0 &  \ldots & \ldots & 0\\
+    \end{pmatrix} \in \mathrm M_{L, K} (\mathbb R).
+\end{gather*}
+
+Из этого разложения легко получить $\Lambda^{1/2} = \mathbb U^\mathrm T \mathbb Y \mathbb V^\mathrm T$ --- квазидиагональное разложение матрицы $\mathbb Y$ \footnote{Это очень интересное утверждение.
+    Для того, чтобы это осознать, нужно вспомнить, что матрицу можно рассматривать, как отображение (линейное). Тогда утверждение состоит в том, что можно подобрать такие базисы в $\mathrm {dom}$ и $\mathrm {codom}$
+нашей матрицы, что она сама примет почти диагональный вид.}
+
+Есть еще eigenvalue decomposition (спектральное разложение): $\mathbb Y \mathbb Y^\mathrm T = \mathbb U \Lambda \mathbb U^\mathrm T$. \\
+\textbf{\color{red} НЕ НАДО ПУТАТЬ!}

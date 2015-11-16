@@ -1,0 +1,19 @@
+% \defaultfontfeatures{Ligatures={TeX},Renderer=Basic}  %% свойства шрифтов по умолчанию
+% \setmainfont[Ligatures={TeX,Historic}]{Times New Roman} %% задаёт основной шрифт документа
+% \setmainfont[Ligatures={TeX}]{Times New Roman} %% задаёт основной шрифт документа
+% \setsansfont{Helvetica}                    %% задаёт шрифт без засечек
+% \setsansfont{CMU Serif}
+% \setmonofont{American Typewriter}               %% задаёт моноширинный шрифт
+% \setmathrm{xits-math.otf}
+% \setmathfont{xits-math.otf}
+\ifxetex
+\setromanfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont[Color={0019D4}]{Courier New}
+\setdefaultlanguage[spelling=modern]{russian}  %% устанавливает главный язык документа
+\setotherlanguage{english}
+\else
+\fi
+
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\parindent=1cm

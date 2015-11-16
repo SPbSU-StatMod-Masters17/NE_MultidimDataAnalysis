@@ -1,0 +1,29 @@
+%!TEX program = xelatex
+\documentclass[12pt,a4paper]{article}
+
+\include{headers/packages}        % Подключаемые пакеты
+\include{headers/styles}          % Пользовательские стили
+\include{headers/commands}  
+
+\newcommand{\Header}{
+  \pagestyle{empty}
+  \begin{center}
+    {\Large\bf 
+     Ответы к коллоквиуму по Многомерному Анализу Данных 
+     }\\
+    \vspace{0.7em}
+    {Собрано {\today} в {\currenttime}}
+  \end{center}
+
+  \vspace{1em}
+  \tableofcontents
+  \pagebreak
+}
+
+\begin{document}
+    \Header{}
+    \input{questions/01-07}
+    \input{questions/15-21}
+    \input{questions/22-28}
+    \input{questions/29-35}
+\end{document}

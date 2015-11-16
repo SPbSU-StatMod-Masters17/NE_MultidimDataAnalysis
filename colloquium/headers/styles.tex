@@ -7,14 +7,16 @@
 % \setmathrm{xits-math.otf}
 % \setmathfont{xits-math.otf}
 \ifxetex
-\setromanfont{Times New Roman}
-\setsansfont{Arial}
+\defaultfontfeatures{Ligatures={TeX},Renderer=Basic}
+\setromanfont[Ligatures={TeX,Historic}]{Times New Roman}
+\setsansfont[Ligatures={TeX,Historic}]{Arial}
 \newfontfamily\cyrillicfont{Arial}
-\setmainfont{Times New Roman}
+\setmainfont[Ligatures={TeX,Historic}]{Times New Roman}
 \newfontfamily\cyrillicfont{Times New Roman}
 \setmonofont[Color={0019D4}]{Courier New}
 \newfontfamily{\cyrillicfonttt}{Courier New}
-\setdefaultlanguage[spelling=modern]{russian}  %% устанавливает главный язык документа
+%%% Кодировки и шрифты %%%
+\setdefaultlanguage{russian}  %% устанавливает главный язык документа
 \setotherlanguage{english}
 \else
 \fi

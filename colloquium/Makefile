@@ -1,5 +1,6 @@
 file = answers 
-all: ;
+all: 
+	echo "Use make pdf or make xe"
 
 pdf:
 	make pdflatex

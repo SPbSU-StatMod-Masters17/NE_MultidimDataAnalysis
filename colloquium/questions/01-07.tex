@@ -56,7 +56,7 @@
     Обозначим $\overline{\mathbf x}_n$ --- выборочное среднее первых $n$ индивидов.
     Тогда для выборочного среднего имеет место следующая (слабая) сходимость:
     \begin{gather*}
-        \sqrt{n} (\overline{\mathbf{x}}_n - \mu) \to \mathcal N(\mathbbold{0}, \Sigma).
+        \sqrt{n} (\overline{\mathbf x}_n - \mu) \to \mathcal N(\mathbbold{0}, \Sigma).
     \end{gather*}
 
     Если же $\mathbf x_1, \ldots, \mathbf x_n \sim \mathcal N(\mu, \Sigma)$, то выборочное среднее $\overline{\mathbf x}_n$ имеет распределение $\mathcal N(\mu, \Sigma/n)$.
@@ -107,7 +107,7 @@ $Z = \mathbb X a$ --- для одного признака и $\mathbb Z = [Z_1 
 Рассмотрим $P_j = F_j / \|F_j\|$ и положим $\sigma_j = \|F_j\|$. Введем матрицы $\Sigma = \mathrm {diag} (\sigma_1, \sigma_2, \ldots, \sigma_d)$ и
 $\mathbb P = [P_1 \colon \ldots \colon P_d] \in \mathrm M_{n, d}(\mathbb R)$.
 Тогда $\Sigma \mathbb P^\mathrm T = \mathbb F^\mathrm T$.\footnote{Смотрим на это на языке столбцов. Тогда все станет ясно.} 
-А значит $\mathbb X = \mathbb Q \Sigma \mathbb F^\mathrm T$.
+А значит $\mathbb X = \mathbb Q \Sigma \mathbb P^\mathrm T$.
 
 C другой стороны, было показано, что $\mathbb X = \sum_{i=1}^d Q_i F_i^\mathrm T = \sum_{i=1}^d \sigma_i Q_i P_i^\mathrm T$.
 

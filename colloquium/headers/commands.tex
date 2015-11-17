@@ -43,3 +43,9 @@
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+
+\ifdef\T {
+    \renewcommand{\T}{\mathrm{T}}
+} {
+    \DeclareMathOperator*{\T}{T}
+}

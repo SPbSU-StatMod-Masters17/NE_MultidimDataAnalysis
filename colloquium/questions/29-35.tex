@@ -2,9 +2,9 @@
 \begin{equation*}
 \langle f_{i,j},f_{k,j} \rangle =
 \langle \langle X_i,V_j\rangle,\langle X_k,X_j \rangle \rangle = 
-\left\langle \frac{V^{\Tr} X_i}{\Vert X_i\Vert}, \frac{V^{\Tr} X_k}{\Vert X_k \Vert}\right\rangle =
-\left\langle \frac{X_i^{\Tr} V V^{\Tr}X_k } {\Vert X_i\Vert \Vert X_k \Vert}\right\rangle = 
-\frac{X_i^{\Tr} X_k}{\Vert X_i\Vert \Vert X_k \Vert}=cos^2(X_i,X_k) .
+\left\langle \frac{V^{\T} X_i}{\Vert X_i\Vert}, \frac{V^{\T} X_k}{\Vert X_k \Vert}\right\rangle =
+\left\langle \frac{X_i^{\T} V V^{\T}X_k } {\Vert X_i\Vert \Vert X_k \Vert}\right\rangle = 
+\frac{X_i^{\T} X_k}{\Vert X_i\Vert \Vert X_k \Vert}=cos^2(X_i,X_k) .
 \end{equation*}
 Если признаки нормированы и центрированы, то $cos^2(X_i,X_k)=cov(X_i,X_k)$.
 
@@ -42,10 +42,10 @@ $\eta$ ---случайный вектор размерности $r$, $\eps$ ---
 
 Можно переписать все в виде:
 \begin{equation*}
-\Sigma = \mathbb{F}\mathbb{F}^{\Tr} + \Psi.
+\Sigma = \mathbb{F}\mathbb{F}^{\T} + \Psi.
 \end{equation*}
 \begin{note}
-$F_i$ не может иметь вид $(0, \ldots, a, \ldots, 0)^{\Tr} \ne  0$, то есть не может быть факторов, уникальных для признаков!
+$F_i$ не может иметь вид $(0, \ldots, a, \ldots, 0)^{\T} \ne  0$, то есть не может быть факторов, уникальных для признаков!
 \end{note}
 
 Стандартно факторный анализ делается по стандартизованным признакам, то есть $\cov \xi = \cor \xi$.
@@ -56,7 +56,7 @@ $\mathbb{F}$ называется факторными нагрузками, $\e
 \subsection{Билет 35. Что делает АГК в модели факторного анализа при равных общностях?}
 Перепишем модель факторного анализа на выборочном языке.
 \begin{equation*}
-\mathbb{X} = \mathbb{V}\mathbb{F}^{\Tr} + \eps.
+\mathbb{X} = \mathbb{V}\mathbb{F}^{\T} + \eps.
 \end{equation*}
 $\mathbb{S}$ --- выборочная ковариационная матрица. 
 Хотим 
@@ -68,7 +68,7 @@ $\mathbb{S}$ --- выборочная ковариационная матриц�
 \begin{equation*}
 \begin{cases}
 \sum\limits_{i \ne j}(s_{ij} - \sum\limits_{k = 1}^{r} f_{ik}f_{jk})^2 \to \min \\
-(\mathbb{F}\mathbb{F}^{\Tr})_{ii} \le 1) 
+(\mathbb{F}\mathbb{F}^{\T})_{ii} \le 1) 
 \end{cases}
 \end{equation*}
 То есть, минимизации по всем элементам, кроме диагональных.

@@ -47,11 +47,12 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 
-\ifdef\T {
-    \renewcommand{\T}{\mathrm{T}}
-} {
-    \DeclareMathOperator*{\T}{T}
-}
+% \ifdef\T {
+%     \renewcommand{\T}{\mathrm{T}}
+% } {
+%     % \DeclareMathOperator*{\T}{\mathrm T}
+%     \newcommand{\T}{\mathrm{T}}
+% }
 
 \newcommand{\Tr}[1]{#1^{\intercal}}
 

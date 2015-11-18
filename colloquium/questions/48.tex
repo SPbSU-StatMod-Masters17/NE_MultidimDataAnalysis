@@ -7,18 +7,18 @@
 	\end{dfn}
 
 	Модель факторного анализа: $\xi = \mathbb F \eta + \eps, \cov{\eta} = I_{r\times r}$. Любое вращение с матрицей вращения $\mathbb W$ выражается как $\xi = \mathbb F \mathbb W^{-1} \mathbb W \eta + \eps = \mathbb F' \eta', \mathbb W \in M_r(\R)$. Тогда
-	$$\cov{\eta'} = \cov{\mathbb W \eta} = \mathbb W \cov{\eta} \mathbb W^\T = \mathbb W \mathbb W^\T $$
+	$$\cov{\eta'} = \cov{\mathbb W \eta} = \mathbb W \cov{\eta} \mathbb W^\mathrm T = \mathbb W \mathbb W^\mathrm T $$
 
-	\danger{$\mathbb W \mathbb W^\T \not = I_{r\times r}$, так как для неортогональных вращений $\mathbb W^\T \not = \mathbb W^{-1}$.}
+	$\mathbb W \mathbb W^\mathrm T \neq I_{r\times r}$, так как для неортогональных вращений $\mathbb W^\mathrm T \not = \mathbb W^{-1}$.
 
 	Посчитаем factor structure:
 
 	\begin{align*}
 		\cov{\left(\xi,\eta'\right)} &= \cov{\left(\mathbb F' \eta' + \eps, \eta'\right)} = \cov{\left(\mathbb F' \eta', \eta'\right)} + \cov{\left(\eps, \mathbb W \eta\right)} =\\
-		&= \mathbb F' \cov{\eta'} + 0 = \mathbb F' \mathbb W \mathbb W^\T = \mathbb F \mathbb W^\T.
+		&= \mathbb F' \cov{\eta'} + 0 = \mathbb F' \mathbb W \mathbb W^\mathrm T = \mathbb F \mathbb W^\mathrm T.
 	\end{align*}
 
-	Если вращение было ортогональным, то $\mathbb W \mathbb W^\T = \mathbb W \mathbb W^{-1} = I$ и $\cov{\left(\xi,\eta'\right)} = \mathbb F$.
+	Если вращение было ортогональным, то $\mathbb W \mathbb W^\mathrm T = \mathbb W \mathbb W^{-1} = I$ и $\cov{\left(\xi,\eta'\right)} = \mathbb F$.
 
 	Factor structure --- выражения исходных признаков через факторы, выписывается по определению модели:
 

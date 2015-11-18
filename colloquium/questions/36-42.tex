@@ -91,7 +91,7 @@ $\xi_{i} = f_{i1}\eta_1 +\cdots+f_{ir}\eta_r + \eps_i$.
 
 Пусть $\mathbb{S}$ --- выборочная ковариационная матрица (известна). $\parallel \mathbb{S} - (\mathbb{FF^\mathrm{T}} + \Psi)\parallel^2_F \rightarrow \min\limits_{\mathbb{F},\Psi}$ (Метод Наименьших Квадратов).
 
-Пусть $\tilde{\mathbb{S}} := \mathbb{FF^\mathrm{T}} + \Psi$. Тогда $\sum\limits_{i,j}(S_{ij} - \tilde S_{ij})^2 \rightarrow \min$.
+Пусть $\widetilde{\mathbb{S}} := \mathbb{FF^\mathrm{T}} + \Psi$. Тогда $\sum\limits_{i,j}(S_{ij} - \tilde S_{ij})^2 \rightarrow \min$.
 
 
 \begin{gather*} 
@@ -104,7 +104,7 @@ $\xi_{i} = f_{i1}\eta_1 +\cdots+f_{ir}\eta_r + \eps_i$.
 Minres --- minimization residual correlations (минимизация разницы известных корреляций и той их частью, что объясняется факторами).
 
 АГК: $\parallel \mathbb{Y} - \mathbb{\tilde{Y}} \parallel \rightarrow \min\limits_{rank\mathrm{\tilde{Y}} \leq r} \Leftrightarrow \parallel \mathbb{Y}\mathbb{Y}^\mathrm{T} - \tilde{\mathbb{Y}} \tilde{\mathbb{Y}}^\mathrm{T} \parallel  
-\rightarrow \min\limits_{rank\mathrm{\tilde{Y}} \leq r}$
+\rightarrow \min\limits_{rank\tilde{\mathrm{Y}} \leq r}$
 
  {\bf{Тут надо все пояснить про АГК, но меня не было на лекции той, простите-помогите.}}
 \subsection{ 39. Какой вид имеет функция правдоподобия в ФА?}
@@ -116,7 +116,9 @@ $\mathcal{L}(\mathbb{X};\mathbb{F}, \Psi) = \prod\limits_{i =1}^n \frac{1}{(2\pi
 Вместо  $\mathbb{X}$ рассм. выборочная ковар. матрица $\mathbb{S}$.
 $\mathcal{L}(\mathbb{S};\mathbb{F}, \Psi)  \sim W_{p}(\Sigma)$.
 
-Так как решений бесконечно много с точностью до вращений, и чтобы как-т о зафиксировать$\mathcal{L}(\mathbb{S};\mathbb{F}, \Psi) \rightarrow \max\limits_{\mathbb{F},\Psi}$
+Так как решений бесконечно много с точностью до вращений, и чтобы как-то зафиксировать$\mathcal{L}(\mathbb{S};\mathbb{F}, \Psi) \rightarrow \max\limits_{\mathbb{F},\Psi}$
+{\color{red} Здесь кажется что-то потерялось???}
+
 \subsection{ 40.  Проверка значимости модели ФА.}
 
 {\bf{Не уверена, что это тот самый вопрос.}} \\
@@ -151,6 +153,9 @@ $\sum\limits_{j = 1}^r{f_{ij}^2 = 1 - D(\eps_i)}$ --- communality(общност
 	
 	
 	При повороте осей примерно на $45^{\circ}$ получим скрытые факторы --- это способности по математике и по физике.
-	
 	{\bf{Не нашла материла про то, какие факторы не находит факторый анализ.}}
 \end{ex}
+
+Вспомним, что в $F$ не бывает признаков вида $\Tr{(0,…,0,a,0,…,0)}$. Поэтому «уникальные» признаки и шум нам разделить не удастся. В частности, может оказаться так, что то, что мы трактуем как шум — на самом деле не шум, а естественный признак объекта. 
+
+{\color{red} Возможно нужно еще что-то сказать про признаки, которые не находятся }

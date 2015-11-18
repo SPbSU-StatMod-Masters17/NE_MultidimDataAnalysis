@@ -31,7 +31,11 @@
 \newtheorem*{ex}{Пример}
 \newtheorem*{design}{Обозначение}
 
+\ifxetex 
+\newcommand{\mathbbold}{\mathbb}
+\else
 \DeclareMathAlphabet{\mathbbold}{U}{bbold}{m}{n}
+\fi
 
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\val}{val}

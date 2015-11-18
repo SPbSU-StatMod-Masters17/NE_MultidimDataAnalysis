@@ -1,4 +1,4 @@
-\\
+
 {\color{blue} Начиная отсюда и до конца 28 билета набирала Лиза.}
 \begin{notation}
 $\mathbb{Y} \in \mathbb{R}^{K\times L}$. 
@@ -135,12 +135,14 @@ $\tilde{B} = A^{\rm T}\tilde{\mathbb{U}}$, где $\tilde{\mathbb{U}} = \mathbb{
 
 \subsection{Билет 28. Чему равны суммы по строкам и по столбцам в матрице факторных нагрузок в АГК?}
 
-Матрица факторных нагрузок --- это $\mathbb{F} = [F_1:\ldots:F_d] = \{f_{ij}\} \in \mathbb{R}^{p\times d}$, $f_{ij} = \langle\,X_i, V_j\,\rangle$.
+Матрица факторных нагрузок --- это $\mathbb{F} = [F_1:\ldots:F_d] = \{f_{ij}\} \in \mathbb{R}^{p\times d}$. Вспомним, что $V_j \in \mathbb{R}^n$, как и столбцы матрицы $\mathbb{X} = [X_1,…,X_p].$. 
+Далее из $SVD$-разложения мы знаем, что $U_i = \frac{YV_i}{\sqrt{\lambda_i}}$. Поэтому $\sqrt{\lambda_i}U_i = YV_i$ и $(F_i)_j = \Inner{X_j}{U_i}$. $F_i$ — i-ый столбец, поэтому 
+$f_{ij} = <X_i, V_j$.  
 
 Сумма квадратов по строкам --- $\sum_{i = 1}^p f_{ij}^2 = \|F_j\|^2 = \lambda_j$.
 Сумма квадратов по столбцам
 \begin{gather*}
-\sum_{j = 1}^d f_{ij}^2 = \sum_{j = 1}^d \langle\,X_i, V_j\,\rangle^2 = 
+\sum_{j = 1}^d f_{ij}^2 = \sum_{j = 1}^d \Inner{X_i}{V_j}^2 = 
 \begin{cases}
  \|X_i\|^2,\ \text{если считать по ковариационной матрице},\\ 
 1,\ \text{если считать по корреляционной матрице}.

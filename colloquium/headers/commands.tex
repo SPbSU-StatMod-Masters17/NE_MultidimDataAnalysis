@@ -31,12 +31,15 @@
 \newtheorem*{ex}{Пример}
 \newtheorem*{design}{Обозначение}
 
+\ifxetex 
+\newcommand{\mathbbold}{\mathbb}
+\else
 \DeclareMathAlphabet{\mathbbold}{U}{bbold}{m}{n}
+\fi
 
 \DeclareMathOperator{\ord}{ord}
 \DeclareMathOperator{\val}{val}
 \DeclareMathOperator{\rk}{rk}
-\DeclareMathOperator{\Tr}{T}
 \DeclareMathOperator{\cov}{cov}
 \DeclareMathOperator{\cor}{cor}
 \DeclareMathOperator{\diag}{diag}
@@ -49,3 +52,10 @@
 } {
     \DeclareMathOperator*{\T}{T}
 }
+
+\newcommand{\Tr}[1]{#1^{\intercal}}
+
+
+\newcommand{\Inner}[2]{\langle\,#1, #2\,\rangle}
+
+\newcommand{\Outer}[2]{ #1\otimes#2}

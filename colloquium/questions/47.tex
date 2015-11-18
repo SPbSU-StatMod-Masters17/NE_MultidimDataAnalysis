@@ -1,24 +1,24 @@
-    \subsection{Методы нахождения факторных значений: LS и WLS (метод Бартлетта) | Анастасия Миллер | 16.11.2015}
-      \newcommand{\tr}{\mathrm T}
-      Матрица наблюдений $\mathbb X \in M_{n, p}(\R)$ в факторном анализе представляется как 
-      $$\mathbb X = \mathbb V \mathbb F^\tr + \boldsymbol\eps, \mathbb V \in M_{n, r}(\R), \mathbb F \in M_{p, r}(\R), \boldsymbol\eps \in M_{n, p}(\R).$$
-      Перепишем для $\mathbb Y = \mathbb X^\tr, \mathbb W = \mathbb V^\tr$ (матрица $\mathbb Y = \left[Y_1:\cdots:Y_n\right]$ содержит наблюдения в столбцах):
-      $$\mathbb Y = \left(\mathbb V \mathbb F^\tr+ \boldsymbol\eps\right)^\tr = \mathbb F \mathbb V ^\tr + \boldsymbol\eps^\tr \implies \forall i\in 1\mathbin{:}n\; Y_i = \mathbb F W_i + \boldsymbol\eps_i.$$
-      \begin{equation}\label{eq::factor_scores_regression}
-        \begin{pmatrix}x_{i1} \\ \vdots \\ x_{ip}\end{pmatrix} = \mathbb F \begin{pmatrix}w_{i1} \\ \vdots \\ w_{ir}\end{pmatrix} + \begin{pmatrix}\eps_{i1} \\ \vdots \\ \eps_{ip}\end{pmatrix}
-      \end{equation}
-      
-      \subsubsection{Ordinary Least Squares}
-        При наличии уже оцененной матрицы факторных нагрузок $\mathbb F$ выражение \ref{eq::factor_scores_regression} может быть рассмотрено как задача линейной регрессии $W_i = (V^\tr)_i$ на $\mathbb F$. Тогда для каждого наблюдения $Y_i$ можно построить соответствующие значения факторов
-        $$\hat{W_i} = \left(\mathbb F^\tr \mathbb F\right)^{-1}\mathbb F^\tr Y_i.$$
-        Модель линейной регрессии работает в предположении о гомоскедастичности (одинаковой вариантивности) данных, т.е. что $\eps_{i1}, \ldots, \eps_{ip}$ --- i.i.d. Модель фактороного анализа делает более слабое предположение: $\left(\eps_{i1}, \ldots, \eps_{ip}\right) \sim N(0, \diag{\left(\sigma_1^2, \ldots, \sigma_p^2\right)})$, т.е. вариативность (степень уникальности в контексте факторного анализа) у разных наблюдений разная.
-      
-      \subsubsection{Weighted Least Squares (метод Бартлетта)}\footnote{Я не смогла найти публикации, где бы в явном виде был изложен именно этот <<самый простой>> вариант}
-        Приведём наши данные к виду, в котором они бы удовлетворяли модели линейной регрессии. Так, если $\boldsymbol\eps_i\sim N(0, \Psi), \Psi = \cov{\boldsymbol\eps_i} = \diag{\left(\sigma_1^2, \ldots, \sigma_p^2\right)}, \Psi^{-1/2} = \diag{\left(\frac{1}{\sigma_1}, \ldots, \frac{1}{\sigma_p}\right)}$, то 
-        $$\cov{\left(\Psi^{-1/2}\boldsymbol\eps_i\right)} = \Psi^{-1/2}\Psi\Psi^{-1/2} = \I_{p\times p} \implies \Psi^{-1/2}\boldsymbol\eps_i \sim N(0, \I_{p\times p})$$
-        Перепишем уравнение модели ФА так, чтобы уникальности в нём были вида $\Psi^{-1/2}\boldsymbol\eps_i$:
-        \begin{equation}
-        \Psi^{-1/2} Y_i = \Psi^{-1/2} \mathbb F W_i + \Psi^{-1/2}\boldsymbol\eps_i \iaoi \Psi^{-1/2} Y_i = \left(\mathbb F^\tr \Psi^{-1/2}\right)^\tr W_i + \Psi^{-1/2}\boldsymbol\eps_i,
-        \end{equation}
-        тогда соответствующее выражение для оценки $W_i$ по МНК имеет вид
-        $$\hat{W_i} = \left(\mathbb F^\tr \Psi^{-1/2} \Psi^{-1/2} \mathbb F\right)^{-1}\mathbb F^\tr \Psi^{-1/2}\Psi^{-1/2} Y_i = \left(\mathbb F^\tr \Psi^{-1} \mathbb F\right)^{-1} \mathbb F^\tr \Psi^{-1} Y_i$$
+{\color{blue} Набирала Стася}
+\subsection{Билет 47. Методы нахождения факторных значений: LS и WLS (метод Бартлетта)}
+  Матрица наблюдений $\mathbb X \in M_{n, p}(\R)$ в факторном анализе представляется как 
+  $$\mathbb X = \mathbb V \mathbb F^\T + \eps, \mathbb V \in M_{n, r}(\R), \mathbb F \in M_{p, r}(\R), \eps \in M_{n, p}(\R).$$
+  Перепишем для $\mathbb Y = \mathbb X^\T, \mathbb W = \mathbb V^\T$ (матрица $\mathbb Y = \left[Y_1:\cdots:Y_n\right]$ содержит наблюдения в столбцах):
+  $$\mathbb Y = \left(\mathbb V \mathbb F^\T+ \eps\right)^\T = \mathbb F \mathbb V ^\T + \eps^\T \implies \forall i\in 1\mathbin{:}n\; Y_i = \mathbb F W_i + \eps_i.$$
+  \begin{equation}\label{eq::factor_scores_regression}
+    \begin{pmatrix}x_{i1} \\ \vdots \\ x_{ip}\end{pmatrix} = \mathbb F \begin{pmatrix}w_{i1} \\ \vdots \\ w_{ir}\end{pmatrix} + \begin{pmatrix}\eps_{i1} \\ \vdots \\ \eps_{ip}\end{pmatrix}
+  \end{equation}
+  
+  \subsubsection{Ordinary Least Squares}
+    При наличии уже оцененной матрицы факторных нагрузок $\mathbb F$ выражение \ref{eq::factor_scores_regression} может быть рассмотрено как задача линейной регрессии $W_i = (V^\T)_i$ на $\mathbb F$. Тогда для каждого наблюдения $Y_i$ можно построить соответствующие значения факторов
+    $$\hat{W_i} = \left(\mathbb F^\T \mathbb F\right)^{-1}\mathbb F^\T Y_i.$$
+    Модель линейной регрессии работает в предположении о гомоскедастичности (одинаковой вариантивности) данных, т.е. что $\eps_{i1}, \ldots, \eps_{ip}$ --- i.i.d. Модель фактороного анализа делает более слабое предположение: $\left(\eps_{i1}, \ldots, \eps_{ip}\right) \sim N(0, \diag{\left(\sigma_1^2, \ldots, \sigma_p^2\right)})$, т.е. вариативность (степень уникальности в контексте факторного анализа) у разных наблюдений разная.
+  
+  \subsubsection{Weighted Least Squares (метод Бартлетта)}\footnote{Я не смогла найти публикации, где бы в явном виде был изложен именно этот <<самый простой>> вариант}
+    Приведём наши данные к виду, в котором они бы удовлетворяли модели линейной регрессии. Так, если $\eps_i\sim N(0, \Psi), \Psi = \cov{\eps_i} = \diag{\left(\sigma_1^2, \ldots, \sigma_p^2\right)}, \Psi^{-1/2} = \diag{\left(\frac{1}{\sigma_1}, \ldots, \frac{1}{\sigma_p}\right)}$, то 
+    $$\cov{\left(\Psi^{-1/2}\eps_i\right)} = \Psi^{-1/2}\Psi\Psi^{-1/2} = \I_{p\times p} \implies \Psi^{-1/2}\eps_i \sim N(0, \I_{p\times p})$$
+    Перепишем уравнение модели ФА так, чтобы уникальности в нём были вида $\Psi^{-1/2}\eps_i$:
+    \begin{equation}
+    \Psi^{-1/2} Y_i = \Psi^{-1/2} \mathbb F W_i + \Psi^{-1/2}\eps_i \iaoi \Psi^{-1/2} Y_i = \left(\mathbb F^\T \Psi^{-1/2}\right)^\T W_i + \Psi^{-1/2}\eps_i,
+    \end{equation}
+    тогда соответствующее выражение для оценки $W_i$ по МНК имеет вид
+    $$\hat{W_i} = \left(\mathbb F^\T \Psi^{-1/2} \Psi^{-1/2} \mathbb F\right)^{-1}\mathbb F^\T \Psi^{-1/2}\Psi^{-1/2} Y_i = \left(\mathbb F^\T \Psi^{-1} \mathbb F\right)^{-1} \mathbb F^\T \Psi^{-1} Y_i.$$

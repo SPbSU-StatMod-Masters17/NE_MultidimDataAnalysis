@@ -1,4 +1,8 @@
 # NE_MultidimDataAnalysis
+В репозитории используются подмодули. Правильное клонирование: git clone --recurse-submodules git@github.com:SPbSU-StatMod-Masters17/NE_MultidimDataAnalysis.git (если не настроили ssh-доступ, то поменять на https-ссылку на репозиторий)
+
+
+
 IX / I semester. Statistics --- Multidimentional Data Analysis -- N.Golyandina
 
     1. Конспект к коллоквиму лежит в соответсвующей папке.

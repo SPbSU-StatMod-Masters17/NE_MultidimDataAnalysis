@@ -1,0 +1,218 @@
+\subsection{ Билет 10. Единый подход к множественной регрессии и одномерному однофакторному дисперсионному анализу (ANOVA) }
+
+Отправной точкой для описания обоих статистических методов является известное Дисперсионное Тождество.
+В рамках ответа на вопрос сложно объяснить значимость этого равенства, однако следует иметь в виду, что корни уходят далеко за пределы статистики.
+Технически теорией, лежащей в основе простой идеи проекции случайных величин на другие случайные величины, является теория Условных Математических Ожиданий (в дальнейшем, УМО).
+В рамках этой теории, в частности, удается сформулировать вариант Теоремы Пифагора для случайных величин, который и называется Дисперсионным Тождеством.
+
+\begin{thm}[Основное Дисперсионное Тождество, без доказательства]
+    Пусть $\eta, \xi$ --- случайные величины, причем $\eta$, обладающая конечным вторым моментом.
+    Тогда
+    \begin{equation}
+        \label{VI}
+        \mathbb D \eta = \mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2 + \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2,
+    \end{equation}
+    где $\mathbb E(\eta \,|\, \xi)$ --- УМО $\eta$ <<при условии>> $\xi$.
+\end{thm}
+
+{ \footnotesize
+Стоит отметить несколько фактов:
+\begin{enumerate}
+    \item Математическое ожидание УМО есть математическое ожидание исходной случайной величины:
+        \begin{equation}
+            \mathbb E \mathbb E(\eta \, | \, \xi) = \mathbb E \eta.
+        \end{equation}
+    \item Математическое ожидание квадрата есть на самом деле ни что иное, как квадрат нормы в пространстве $\mathrm L^2$, порожденным соответствующим распределением.
+    \item Как и в любой нормальной теореме Пифагора слагаемые в правой части \eqref{VI} (точнее то, что стоит под нормой) оказываются ортогональными, то есть
+        \begin{equation}
+            \mathbb E [ (\eta - \mathbb E(\eta\, | \, \xi)) \mathbb E(\eta\, | \, \xi) \big ] = 0.
+        \end{equation}
+    \item УМО $\mathbb E(\eta \, | \, \xi)$ --- есть результат ортогонального\footnote{именно это уточнено в предыдущем пункте} проецирования
+        $\eta$ на подпространство, порожденное случайной величиной $\xi$.
+\end{enumerate}
+}
+
+Рассмотрим теперь ANOVA, в которой используется частный случай Основного Тождества.
+\paragraph{ANOVA}
+Общая постановка задачи.
+Пусть есть $k$ групп, мы пытаемся проверить, что группы друг от друга не отличаются.
+Формально есть $k$ (одномерных) случайных величин $\eta_1, \ldots, \eta_k$ и гипотеза формулируется так:
+\begin{equation}
+    \label{PreANOVA}
+    \mathrm H_0: \mathcal P(\eta_1) = \mathcal P(\eta_2) = \ldots \mathcal =P(\eta_k).
+\end{equation}
+Эту задачу можно переформулировать следующим образом.
+Пусть есть дискретный (м.б. качественный) признак $\xi$, принимающий ровно $k$ значений: $A_1, A_2, \ldots, A_k$.
+Рассмотрим случайный вектор $\Tr{(\eta, \xi)}$, такой что $\mathcal P(\eta \, | \, \xi = A_i) = \mathcal P(\eta_i)$ для всех $i \in 1:k$.
+Тогда гипотеза \eqref{PreANOVA} переписывается в виде:
+\begin{equation}
+    \label{PreANOVA2}
+    \mathrm H_0^*: \mathcal P(\eta \, | \, \xi = A_i) = \mathcal P(\eta \, | \, \xi = A_j) \text{ для всех $i, j$}.
+\end{equation}
+
+В ANOVA рассматривается частный случай (модель), когда $\mathcal P(\eta_i) = \mathcal N(\mu_i, \sigma^2)$.
+В рамках этой модели гипотезам \eqref{PreANOVA} и \eqref{PreANOVA2} равносильны следующие две\footnote{равносильные} гипотезы:
+\begin{gather}
+    \label{ANOVA}
+    \mathrm H_0: \mu_1 = \mu_2 = \ldots = \mu_k.\\
+    \mathrm H_0^*: \mathbb E (\eta \, | \, \xi = A_1) = \ldots = \mathbb E (\eta \, | \, \xi = A_k).
+\end{gather}
+Заметим, что в рамках Основного Дисперсионного Тождества гипотезу можно сформулировать следующим образом:
+\begin{gather}
+    \label{ANOVA_VI_H}
+    \mathrm H_0: \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2 = 0,
+\end{gather}
+это запись по большому счету и означает, что средние внутри групп не отличаются от общего среднего.
+
+Выборка задается следующим образом: имеется $n_i$ индивидов из $i$-той группы ($i \in 1:k$).
+Обозначим $y_{ij}$ --- $j$-того индивида из $i$-той группы ($i \in 1:k$ и $j \in 1:n_i$).
+Обозначим $\overline y$ --- выборочное среднее по всем индивидам, а $\overline y_i$ --- выборочное среднее индивидов $i$-той группы.
+Запишем \eqref{VI} на выборочном языке:
+\begin{gather}
+    \label{VI_ANOVA}
+    \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij} - \overline y)^2 = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij} - \overline y_i)^2 + \sum_{i=1}^k n_i (\overline y_i - \overline y)^2.
+\end{gather}
+Убедитесь, что понимаете (хотя бы интуитивно), откуда это получается!
+
+Далее факты из курса статистики:
+\begin{gather*}
+    \mathrm {SS Total} = \mathrm {SST} \overset{\mathrm{def}}{=} \widehat{\mathbb D \eta} = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij} - \overline y)^2 \sim \mathcal \sigma^2 \chi^2 (n - 1);\\
+    \mathrm {SS Within} = \mathrm {SSW} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2} = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij} - \overline y_i)^2\sim \sigma^2 \mathcal \chi^2 (n - k);\\
+    \mathrm {SS Between} = \mathrm {SSB} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2} = \sum_{i=1}^k n_i (\overline y_i - \overline y)^2 \sim \sigma^2 \mathcal \chi^2 (k - 1).
+\end{gather*}
+
+Сама статистика имеет вид
+\begin{gather*}
+    F = \frac{\mathrm{SSB} / (k - 1)}{\mathrm{SSW} / (n - k)} \sim \mathrm F_{k-1,n-k}.
+\end{gather*}
+Убедитесь, что понимаете, что при условии знания распределений $\chi^2$, тут правда получается ФИШЕР!
+Откуда берется числитель должно быть ясно, из представления гипотезы в виде \eqref{ANOVA_VI_H}, знаменатель тоже можно объяснить, но это чуть более тонкое дело.
+
+Также в ANOVA рассматривают следующее корреляционное отношение\footnote{Это тоже термин из УМО.}:
+\begin{gather}
+    \label{ANOVA_cor}
+    r^2 = \hat r^2(\eta \, | \, \xi) = \mathrm{\frac{SSB}{SST}} = 1 - \mathrm{\frac{SSW}{SST}} = 1 - \frac{\min_{\varphi} \widehat {\mathbb E}(\eta - \varphi(\xi))^2}{\widehat {\mathbb D} \eta}.
+\end{gather}
+
+\paragraph{Multiple Linear Regression}
+Здесь мы не будем касаться вопросов построения МНК-оценок, а сразу перейдем к проверке значимости регрессии.
+Заметим, что в исходной регрессионной постановке задачи (как поиска проектора на подпространство столбцов матрицы данных) нет никакой случайности, там все детерминировано.
+Но когда мы переходим к гипотезам, должна появиться модель, и именно здесь появляется случайность, выраженная шумом.
+
+Модель имеет вид:
+\begin{gather*}
+    Y = \mathbb X B + \varepsilon,
+\end{gather*}
+где $n$ индивидов и $p$ предсказывающих переменных, $\varepsilon \sim \mathcal N(0, \mathrm {diag}(\sigma^2, \sigma^2, \ldots, \sigma^2))$ --- шум.
+
+На генеральном языке можно сказать\footnote{Хотя, как я понимаю, это идет несколько вразрез с исходной постановкой задачи},
+что у нас есть нормальный вектор $\xi = \Tr{(\xi_1, \ldots, \xi_k)}$ и мы строим его регрессию на некоторую другую случайную величину $\eta$.
+
+Гипотеза в терминах MLR формулируется о незначимости регрессии, то есть, что
+\begin{gather}
+    \label{MLR_H}
+    \mathrm H_0: B = 0.
+\end{gather}
+
+Заметим, что в рамках Основного Дисперсионного Тождества гипотезу, как и в случае ANOVA, можно сформулировать следующим образом:
+\begin{gather}
+    \label{MLR_VI_H}
+    \mathrm H_0: \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2 = 0.
+\end{gather}
+Несложно понять, что эта запись, есть то же самое, что и \eqref{MLR_H}.
+
+Выборка задана набором $\{y_i\}_{i=1}^n$. Обозначим $\hat y_i$ --- наилучшее\footnote{Все должны помнить в каком смысле.} по МНК предсказание $y_i$.
+Запишем \eqref{VI} на выборочном языке:
+\begin{gather}
+    \label{VI_ANOVA}
+    \sum_{i=1}^n (y_i - \overline y)^2 = \sum_{i=1}^n (y_{i} - \hat y_i)^2 + \sum_{i=1}^n (\hat y_i - \overline y)^2.
+\end{gather}
+Убедитесь, что понимаете (хотя бы интуитивно), откуда это получается!
+
+Далее факты из курса статистики:
+\begin{gather*}
+    \mathrm {SS Total} = \mathrm {SST} \overset{\mathrm{def}}{=} \widehat{\mathbb D \eta} = \sum_{i=1}^n (y_i - \overline y)^2 \sim \mathcal \sigma^2 \chi^2 (n - 1);\\
+    \mathrm {SS Error} = \mathrm {SSE} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2} = \sum_{i=1}^n (y_{i} - \hat y_i)^2 \sim \sigma^2 \mathcal \chi^2 (n - k - 1);\\
+    \mathrm {SS Residuals} = \mathrm {SSR} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2} = \sum_{i=1}^n (\hat y_i - \overline y)^2 \sim \sigma^2 \mathcal \chi^2 (k).
+\end{gather*}
+
+Сама статистика имеет вид
+\begin{gather*}
+    F = \frac{\mathrm{SSR} / k}{\mathrm{SSE} / (n - k - 1)} \sim \mathrm F_{k,n-k-1}.
+\end{gather*}
+Убедитесь, что понимаете, что при условии знания распределений $\chi^2$, тут правда получается ФИШЕР!
+
+Так же при регрессии рассматривают множественный коэффициент корреляции между $\eta$, $\xi$:
+\begin{gather}
+    \label{MLR_coef_cor}
+    \nonumber
+    r^2 = \hat {\mathrm R}^2(\eta; \{\xi_1, \xi_2, \ldots, \xi_k\}) = \mathrm{\frac{SSR}{SST}} = 1 - \mathrm{\frac{SSE}{SST}} = \\ =
+    1 - \frac{\min_{a_0, a_1, \ldots, a_k} \hat {\mathbb E}(\eta - (a_0 + \sum_{i=1}^k a_i \xi_i))^2}{\widehat {\mathbb D} \eta}.
+\end{gather}
+
+\paragraph{Выводы}
+Я думаю, что даже тот, кто просматривал этот текст одним глазом заметил, что я написал два раза почти одно и то же.
+Теперь дадим некоторый общий (и на самом деле удобный) взгляд на то, что было раньше.
+
+Начнем с гипотез. Заметим, что \eqref{ANOVA_VI_H} и \eqref{MLR_VI_H} вообще ничем не отличается, поэтому можно ввести следующую удобную универсальную терминологию (шляпа, как всегда обозначает оценки, смысл которых уточняется в частных случаях).
+\begin{gather*}
+    \mathrm {Hypothesis} \overset{\mathrm{def}}{=} \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2.\\
+    \mathrm {Error} \overset{\mathrm{def}}{=} \mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2;\\
+    \mathrm {SS Total} = \mathrm {SST} \overset{\mathrm{def}}{=} \widehat{\mathbb D \eta};\\
+    \mathrm {SS Error} = \mathrm {SSE} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2};\\
+    \mathrm {SS Hypothesis} = \mathrm {SSH} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2}.
+\end{gather*}
+
+В этих обозначениях общая гипотеза будет иметь вид:
+\begin{gather*}
+    \mathrm H_0: \mathrm{Hypothesis} = 0.
+\end{gather*}
+
+А Дисперсионное Тождество на выборочном языке:
+\begin{gather*}
+    \mathrm{SST = SSH + SSE}.
+\end{gather*}
+
+Статистика в общем виде будет выглядеть, как
+\begin{gather*}
+    F = \frac{\mathrm{SSH} / \nu_H}{\mathrm{SSE} / \nu_E} \sim \mathrm F_{\nu_H, \nu_E},
+\end{gather*}
+где $\nu_\cdot$ --- нормировочные числа, отвечающие за степени свободы.
+
+На будущее вводим обозначения:
+\begin{gather*}
+    \lambda \overset{\mathrm{def}}{=} \mathrm{\frac{SSH}{SSE}};\\
+    \Lambda \overset{\mathrm{def}}{=} \frac{1}{1 + \lambda} \sim \Lambda_1 (\nu_H, \nu_E);\footnotemark
+\end{gather*}
+\footnotetext{Докажите это! НЭ будет это спрашивать. Удачи.}
+
+Обобщающее \eqref{ANOVA_cor} и \eqref{MLR_coef_cor} определение:
+\begin{gather*}
+    r^2 = \mathrm{\frac{SSH}{SST}}. 
+\end{gather*}
+
+
+\subsection{Билет 11. Представление одномерного однофакторного дисперсионного анализа в виде множественной регрессии с фиктивными переменными.}
+
+Вот есть ANOVA и есть многомерная регрессия... У них много общего. Сейчас мы покажем, что на самом деле на ANOVA можно посмотреть, как на частный случай, многомерной регрессии.
+Будем пользоваться обозначениями билета 10.
+Для $i \in 1:{k-1}$ введем $\xi_i = \mathbb I (\xi = A_i)$ -- фиктивные переменные.
+
+\begin{thm}
+    $r^2(\eta \, | \, \xi) = \mathrm R^2 (\eta, \{\xi_1, \xi_2, \ldots, \xi_{k-1}\})$.
+\end{thm}
+\begin{proof}
+    Распишем по определению обе части равенства.
+    \begin{gather*}
+        r^2(\eta \, | \, \xi) = 1 - \frac{\min_{\varphi} \mathbb E(\eta - \varphi(\xi))^2}{\mathbb D \eta};\\
+        \mathrm R^2(\eta; \{\xi_1, \xi_2, \ldots, \xi_k\}) = 1 - \frac{\min_{a_0, a_1, \ldots, a_k} {\mathbb E}(\eta - (a_0 + \sum_{i=1}^k a_i \xi_i))^2}{{\mathbb D} \eta}.
+    \end{gather*}
+    Минимум в корреляционном отношении идет по всем измеримым функциям, каждая из которых однозначно определяется набором значений $\{\varphi(A_i)\}$.
+    Пусть минимум в корреляционном отношении достигается на функции $\varphi^*$. Положим $a_i = \varphi^*(A_i)$ для $i \in 1:(k-1)$ и $a_0 = \varphi^*(A_k)$.
+    От противного легко доказать, что именно на этом наборе коэффициентов достигается минимум в коэффициенте корреляции.
+    В обратную сторону -- аналогично.\footnote{\color{blue} Вроде бы тут все корректно. Проверьте, кто может.}
+\end{proof}
+
+\subsection{Билет 12. Корреляционное отношение с дискретным одномерным признаком и множественный коэффициент корреляции.}
+
+По-моему, это тот же 11ый билет.

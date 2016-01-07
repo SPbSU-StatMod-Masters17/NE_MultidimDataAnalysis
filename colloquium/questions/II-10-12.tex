@@ -133,7 +133,7 @@
 \begin{gather*}
     \mathrm {SS Total} = \mathrm {SST} \overset{\mathrm{def}}{=} \widehat{\mathbb D \eta} = \sum_{i=1}^n (y_i - \overline y)^2 \sim \mathcal \sigma^2 \chi^2 (n - 1);\\
     \mathrm {SS Error} = \mathrm {SSE} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2} = \sum_{i=1}^n (y_{i} - \hat y_i)^2 \sim \sigma^2 \mathcal \chi^2 (n - k - 1);\\
-    \mathrm {SS Residuals} = \mathrm {SSR} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2} = \sum_{i=1}^n (\hat y_i - \overline y)^2 \sim \sigma^2 \mathcal \chi^2 (k).
+    \mathrm {SS Regression} = \mathrm {SSR} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2} = \sum_{i=1}^n (\hat y_i - \overline y)^2 \sim \sigma^2 \mathcal \chi^2 (k).
 \end{gather*}
 
 Сама статистика имеет вид
@@ -144,9 +144,9 @@
 
 Так же при регрессии рассматривают множественный коэффициент корреляции между $\eta$, $\xi$:
 \begin{gather}
-    \label{MLR_coef_cor}
     \nonumber
     r^2 = \hat {\mathrm R}^2(\eta; \{\xi_1, \xi_2, \ldots, \xi_k\}) = \mathrm{\frac{SSR}{SST}} = 1 - \mathrm{\frac{SSE}{SST}} = \\ =
+    \label{MLR_coef_cor}
     1 - \frac{\min_{a_0, a_1, \ldots, a_k} \hat {\mathbb E}(\eta - (a_0 + \sum_{i=1}^k a_i \xi_i))^2}{\widehat {\mathbb D} \eta}.
 \end{gather}
 
@@ -194,7 +194,7 @@
 
 \subsection{Билет 11. Представление одномерного однофакторного дисперсионного анализа в виде множественной регрессии с фиктивными переменными.}
 
-Вот есть ANOVA и есть многомерная регрессия... У них много общего. Сейчас мы покажем, что на самом деле на ANOVA можно посмотреть, как на частный случай, многомерной регрессии.
+Вот есть ANOVA и есть многомерная регрессия... У них много общего. Сейчас мы покажем, что на самом деле на ANOVA можно посмотреть, как на частный случай многомерной регрессии.
 Будем пользоваться обозначениями билета 10.
 Для $i \in 1:{k-1}$ введем $\xi_i = \mathbb I (\xi = A_i)$ -- фиктивные переменные.
 

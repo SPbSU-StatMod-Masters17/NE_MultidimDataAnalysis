@@ -10,7 +10,7 @@
     Тогда
     \begin{equation}
         \label{VI}
-        \mathbb D \eta = \mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2 + \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2,
+        \mathbb D \eta = \mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2 + \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \eta)^2,
     \end{equation}
     где $\mathbb E(\eta \,|\, \xi)$ --- УМО $\eta$ <<при условии>> $\xi$.
 \end{thm}
@@ -35,7 +35,7 @@
 Рассмотрим теперь ANOVA, в которой используется частный случай Основного Тождества.
 \paragraph{ANOVA}
 Общая постановка задачи.
-Пусть есть $k$ групп, мы пытаемся проверить, что группы друг от друга не отличаются.
+Пусть есть $k$ групп и $p$ признаков, мы пытаемся проверить, что группы друг от друга не отличаются.
 Формально есть $k$ (одномерных) случайных величин $\eta_1, \ldots, \eta_k$ и гипотеза формулируется так:
 \begin{equation}
     \label{PreANOVA}
@@ -60,7 +60,7 @@
 Заметим, что в рамках Основного Дисперсионного Тождества гипотезу можно сформулировать следующим образом:
 \begin{gather}
     \label{ANOVA_VI_H}
-    \mathrm H_0: \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2 = 0,
+    \mathrm H_0: \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \eta)^2 = 0,
 \end{gather}
 это запись по большому счету и означает, что средние внутри групп не отличаются от общего среднего.
 
@@ -78,7 +78,7 @@
 \begin{gather*}
     \mathrm {SS Total} = \mathrm {SST} \overset{\mathrm{def}}{=} \widehat{\mathbb D \eta} = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij} - \overline y)^2 \sim \mathcal \sigma^2 \chi^2 (n - 1);\\
     \mathrm {SS Within} = \mathrm {SSW} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2} = \sum_{i=1}^k \sum_{j=1}^{n_i} (y_{ij} - \overline y_i)^2\sim \sigma^2 \mathcal \chi^2 (n - k);\\
-    \mathrm {SS Between} = \mathrm {SSB} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2} = \sum_{i=1}^k n_i (\overline y_i - \overline y)^2 \sim \sigma^2 \mathcal \chi^2 (k - 1).
+    \mathrm {SS Between} = \mathrm {SSB} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \eta)^2} = \sum_{i=1}^k n_i (\overline y_i - \overline y)^2 \sim \sigma^2 \mathcal \chi^2 (k - 1).
 \end{gather*}
 
 Сама статистика имеет вид
@@ -96,35 +96,52 @@
 
 \paragraph{Multiple Linear Regression}
 Здесь мы не будем касаться вопросов построения МНК-оценок, а сразу перейдем к проверке значимости регрессии.
-Заметим, что в исходной регрессионной постановке задачи (как поиска проектора на подпространство столбцов матрицы данных) нет никакой случайности, там все детерминировано.
-Но когда мы переходим к гипотезам, должна появиться модель, и именно здесь появляется случайность, выраженная шумом.
+Уточним смысл сказанного. Во-первых, вспомним, что по определению регрессия --- УМО.
+Во-вторых, какая бы модель у нас ни была, в стандартной ситуации нам нужно от этой модели только, чтобы УМО было линейным
+(это будет ясно чуть далее).
+Существует несколько моделей, в которых УМО --- линейно. Приведем примеры двух из них.
 
-Модель имеет вид:
 \begin{gather*}
-    Y = \mathbb X B + \varepsilon,
+    \eta = \Tr{B} \overline \xi + \varepsilon,
 \end{gather*}
-где $n$ индивидов и $p$ предсказывающих переменных, $\varepsilon \sim \mathcal N(0, \mathrm {diag}(\sigma^2, \sigma^2, \ldots, \sigma^2))$ --- шум.
+где $\overline \xi \in \R^k$ --- случайный вектор, $\eta \in \R$, $\eps \in \R$ --- 
+случайные величины, $B \in \mathrm \R^k$ --- вектор коэффициентов,
+причем $\overline \xi$, $\varepsilon$ --- независимы и $\mathbb E\varepsilon = 0$.
 
-На генеральном языке можно сказать\footnote{Хотя, как я понимаю, это идет несколько вразрез с исходной постановкой задачи},
-что у нас есть нормальный вектор $\xi = \Tr{(\xi_1, \ldots, \xi_k)}$ и мы строим его регрессию на некоторую другую случайную величину $\eta$.
+%На генеральном языке можно сказать\footnote{Хотя, как я понимаю, это идет несколько вразрез с исходной постановкой задачи},
+%что у нас есть нормальный вектор $\xi = \Tr{(\xi_1, \ldots, \xi_k)}$ и мы строим его регрессию на некоторую другую случайную величину $\eta$.
 
-Гипотеза в терминах MLR формулируется о незначимости регрессии, то есть, что
+В такой модели нетрудно посчитать, что $\mathbb E(\eta \, | \, \overline \xi) = \Tr{B} \overline \xi$,
+то есть регрессия является линейной, нас это устраивает.
+
+Примером другой модели такого типа является следующая: $\Tr{(\eta, \overline \xi)} \sim \mathcal N$ с
+какими-то параметрами, которые нас сейчас не интересуют. Важно то, что в такой модели
+тоже найдется вектор $B$: $\mathbb E(\eta \, | \, \overline \xi) = \Tr{B} \overline \xi$.
+
+Гипотеза о незначимости регрессии в терминах MLR формулируется следующим образом:
 \begin{gather}
     \label{MLR_H}
     \mathrm H_0: B = 0.
 \end{gather}
+Именно здесь используется то, что мы требуем линейности регрессии (найдется такой вектор!).
 
-Заметим, что в рамках Основного Дисперсионного Тождества гипотезу, как и в случае ANOVA, можно сформулировать следующим образом:
+Учитывая то обстоятельноство, что для независимых $\xi_1, \xi_2$ справедливо, что $\mathbb E (\xi_1 \, | \, \xi_2) = \mathbb E\xi_1$,
+гипотеза о незначимости регрессии для моделей можно свести к другой, сформулированной в рамках Основного Дисперсионного Тождества
+\eqref{VI}:
 \begin{gather}
     \label{MLR_VI_H}
-    \mathrm H_0: \mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2 = 0.
+    \mathrm H_0: \mathbb E(\mathbb E(\eta\, | \, \overline \xi) - \mathbb E \eta)^2 = 0.
 \end{gather}
-Несложно понять, что эта запись, есть то же самое, что и \eqref{MLR_H}.
+Несложно понять, что эта запись есть то же самое, что и \eqref{MLR_H}.
+
+Заметим, что вторая гипотеза является гораздо более общей, в ней не нужны предположения о линейности регрессии!
+Обратим внимание, что эта гипотеза полностью совпадает по своему виду с гипотезой \eqref{ANOVA_VI_H},
+которая проверяется с помощью ANOVA. 
 
 Выборка задана набором $\{y_i\}_{i=1}^n$. Обозначим $\hat y_i$ --- наилучшее\footnote{Все должны помнить в каком смысле.} по МНК предсказание $y_i$.
 Запишем \eqref{VI} на выборочном языке:
 \begin{gather}
-    \label{VI_ANOVA}
+    \label{VI_MLR}
     \sum_{i=1}^n (y_i - \overline y)^2 = \sum_{i=1}^n (y_{i} - \hat y_i)^2 + \sum_{i=1}^n (\hat y_i - \overline y)^2.
 \end{gather}
 Убедитесь, что понимаете (хотя бы интуитивно), откуда это получается!
@@ -133,7 +150,7 @@
 \begin{gather*}
     \mathrm {SS Total} = \mathrm {SST} \overset{\mathrm{def}}{=} \widehat{\mathbb D \eta} = \sum_{i=1}^n (y_i - \overline y)^2 \sim \mathcal \sigma^2 \chi^2 (n - 1);\\
     \mathrm {SS Error} = \mathrm {SSE} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2} = \sum_{i=1}^n (y_{i} - \hat y_i)^2 \sim \sigma^2 \mathcal \chi^2 (n - k - 1);\\
-    \mathrm {SS Regression} = \mathrm {SSR} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2} = \sum_{i=1}^n (\hat y_i - \overline y)^2 \sim \sigma^2 \mathcal \chi^2 (k).
+    \mathrm {SS Regression} = \mathrm {SSR} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \eta)^2} = \sum_{i=1}^n (\hat y_i - \overline y)^2 \sim \sigma^2 \mathcal \chi^2 (k).
 \end{gather*}
 
 Сама статистика имеет вид
@@ -147,7 +164,7 @@
     \nonumber
     r^2 = \hat {\mathrm R}^2(\eta; \{\xi_1, \xi_2, \ldots, \xi_k\}) = \mathrm{\frac{SSR}{SST}} = 1 - \mathrm{\frac{SSE}{SST}} = \\ =
     \label{MLR_coef_cor}
-    1 - \frac{\min_{a_0, a_1, \ldots, a_k} \hat {\mathbb E}(\eta - (a_0 + \sum_{i=1}^k a_i \xi_i))^2}{\widehat {\mathbb D} \eta}.
+    хЬ№О1 - \frac{\min_{a_0, a_1, \ldots, a_k} \hat {\mathbb E}(\eta - (a_0 + \sum_{i=1}^k a_i \xi_i))^2}{\widehat {\mathbb D} \eta}.
 \end{gather}
 
 \paragraph{Выводы}
@@ -160,7 +177,7 @@
     \mathrm {Error} \overset{\mathrm{def}}{=} \mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2;\\
     \mathrm {SS Total} = \mathrm {SST} \overset{\mathrm{def}}{=} \widehat{\mathbb D \eta};\\
     \mathrm {SS Error} = \mathrm {SSE} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\eta - \mathbb E(\eta\, | \, \xi))^2};\\
-    \mathrm {SS Hypothesis} = \mathrm {SSH} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \xi)^2}.
+    \mathrm {SS Hypothesis} = \mathrm {SSH} \overset{\mathrm{def}}{=} \widehat{\mathbb E(\mathbb E(\eta\, | \, \xi) - \mathbb E \eta)^2}.
 \end{gather*}
 
 В этих обозначениях общая гипотеза будет иметь вид:

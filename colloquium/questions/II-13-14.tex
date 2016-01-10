@@ -1,0 +1,86 @@
+\subsection{Билет 13. Обобщенная задача на собственные значения}
+\paragraph{Алгебраические факты}
+\begin{itemize}
+\item[1.] Пусть $\C \in \R^{q \times p}$ --- неотрицательно определенная матрица. $\lambda_1 \geq \dots \geq \lambda > 0$ --- собственные числа.
+
+Тогда $\mathrm {tr} \C = \sum \limits_{i = 1}^{p} \lambda_i$; $|\C| = \prod \limits_{i = 1}^p \lambda_i$.
+
+При этом верно следующее: $|\mathbb{I} + \C| = \prod \limits_{i = 1}^p (1 + \lambda_i)$
+\item[2.] Пусть $\mathbb{A}$ --- симметричная, неотрицательно определенная матрица. $\mathbb{B}$ --- асимметричная, положительно определенная матрица (т.е. существует обратная к ней). 
+Тогда $\mathbb{B}^{-1}\mathbb{A}$ имеет неотрицательные собственные числа: $\lambda_1 \geq \dots \geq \lambda_p \geq 0$ ($\mathbb{B}^{-1}\mathbb{A}$ не является симметричной).
+
+Имеет место задача:
+%
+\begin{equation*}
+\mathbb{B}^{-1}\mathbb{A}\mathbb{U} = \lambda \mathbb{U} \mathbb{A}\mathbb{U} = \lambda \mathbb{B} \mathbb{U},
+\end{equation*}
+%
+при этом $\mathbb{U}$ --- не являются ортогональными (так как матрица $\mathbb{B}^{-1}\mathbb{A}$). Это \textbf{обобщенная задача на собственные числа}. Обобщенность задачи состоит в том, что в правом равенстве появляется матрица $\mathbb{B}$. 
+\end{itemize}
+
+Докажем, что собственные числа матрицы $\mathbb{B}^{-1}\mathbb{A}$ --- неотрицательные.
+Пусть матрица имеет какое--то разложение: $\mathbb{B} = \mathbb{L}\mathbb{L}^{\mathrm{T}}$ (например, разложение Холецкого --- произведение верхнедиагональной матрицы на нижнедиагональную), при этом важно помнить, что так как $\mathbb{B}$ --- положительно определена, то существует $\mathbb{L}^{-1}$.
+
+Получаем: $\mathbb{A}\mathbb{U} = \lambda \mathbb{L} \mathbb{L}^{\mathrm{T}}\mathbb{U}$.
+Добавим выражение $(\mathbb{L}\mathbb{L}^{-1})^{\mathrm{T}}$:
+$\mathbb{A}(\mathbb{L}\mathbb{L}^{-1})^{\mathrm{T}}\mathbb{U} = \lambda \mathbb{L} \mathbb{L}^{\mathrm{T}}\mathbb{U}$\\
+$\mathbb{L}^{-1} \mathbb{A}(\mathbb{L}^{-1})^{\mathrm{T}}\mathbb{L}^{\mathrm{T}}\mathbb{U} = \lambda\mathbb{L}^{\mathrm{T}}\mathbb{U}$.\\
+В итоге получили, что те самые $\lambda_i$ на самом деле являются собственными числами матрицы $\mathbb{A}$, а она --- симметричная. А это значит, что собственные числа $\lambda_i$ --- неотрицательные. Кроме того, получили, что $\mathbb{L}^{\mathrm{T}}\mathbb{U}$ --- ортонормированные, то есть $\mathbb{U}^{\mathrm{T}}\mathbb{L}\mathbb{L}^{\mathrm{T}}\mathbb{U} = \mathbb{L}^{\mathrm{T}}\mathbb{B}\mathbb{L} = \mathbb{I}$. Таким образом, свели обобщенную задачу к обычной: в обычной задаче $\mathbb{L}^{\mathrm{T}}\mathbb{U}$ --- ортонормированные, то есть по сути просто записали условие ортонормированности, а потом оказалось, что в середине находится исходная матрица $\mathbb{B}$.Таким образом, получаем условие ``косоугольной'' ортонормированности. (тут $\mathbb{B}$  в каком--то смысле регулирует ортогональность)
+
+\begin{notation}
+Рассмотрим задачу $\Big (\sup \limits{||z|| \leq 1}  Z^{\mathrm{T}}\mathbb{A}Z\Big )$. Супремум будет достигаться на первом собственном числе, а $Z$, на котором достигается супремум --- первый собственный вектор. Далее, если решаем эту же задачу для векторов, ортогональных тому, что было изначально, то получим второе собственное число и т.д.
+\end{notation}
+
+Эту задачу можно переписать так:
+%
+\begin{equation*}
+\Big (\sup \limits{||Z|| \leq 1}  Z^{\mathrm{T}}\mathbb{A}Z = \sup \limits{Z}  \frac{Z^{\mathrm{T}}\mathbb{A}Z}{Z^{\mathrm{T}}Z} \Big )
+\end{equation*}
+%
+
+А в обобщенной задаче возникает следующее:
+%
+\begin{equation*}
+\sup \limits{Z}  \frac{Z^{\mathrm{T}}\mathbb{A}Z}{Z^{\mathrm{T}}\mathbb{B}Z} \Big) = \lambda_1,
+\end{equation*}
+%
+где $\lambda_1$ --- максимальное собственное число матрицы $\mathbb{B}^{-1}\mathbb{A}$. Супремом достигается на соответствующем собственном векторе. (потом будет использоваться в дисперсионноа анализе)
+
+%
+\begin{equation*}
+\sup \limits{Z, Z\mathbb{B}U_i = 0, i = 1,\dots, j}  \frac{Z^{\mathrm{T}}\mathbb{A}Z}{Z^{\mathrm{T}}\mathbb{B}Z} \Big) = \lambda_j,
+\end{equation*}
+%
+где $\lambda_j$ --- собственное число, а $A_j$ --- собственный вектор матрицы $\mathbb{B}^{-1}\mathbb{A}$, на котором достигается максимум.
+
+На случайном языке:
+\begin{sug}
+Пусть $\mathbb{B}, \mathbb{A} \sim$ Уишарта --- независимые, с числом степеней свободы $\nu_B, \nu_A$, соответственно. При этом матрица $\mathbb{B}$ --- положительно определенная. Пусть также $\lambda_i$ --- с.ч. $\mathbb{B}^{-1}\mathbb{A}$. 
+Тогда $\sum \limits_{i = 1}^p \frac{1}{1 + \lambda_i} \sim Wilks(\nu_A, \nu_B)$.
+\end{sug}
+Верно по свойствам алгебры (см. выше). Кроме того
+\begin{equation*}
+\frac{|\mathbb{B}|}{|\mathbb{B} + \mathbb{A}|} = \frac{1}{|\mathbb{I} + \mathbb{B}^{-1}\mathbb{A}|} = \prod \limits_{i = 1}^p \frac{1}{1 + \lambda_i}.
+\end{equation*}
+
+\subsection{Билет 14. Распределения Лямбда Уилкса. Частный случай $p=1$}
+Пусть $\mathbb{A} \sim \mathcal{W}_p (\mathbb{I},\nu_A)$, $\mathbb{B} \sim \mathcal{W}_p (\mathbb{I}, \nu_B)$, при этом $\nu_B > p > \nu_A$.
+Тогда имеет место следующий теоретический факт:
+%
+\begin{equation*}
+\Lambda = \frac{|\mathbb{B}|}{|\mathbb{A} + \mathbb{B}|} =\frac{1}{|\mathbb{I} + \mathbb{B}^{-1}\mathbb{A}|} \sim \Lambda_p (\nu_A, \nu_B),
+\end{equation*}
+%
+где $\nu_B$ будет стремиться к бесконечности (как обозначается в статистике критерия Фишера: вторая степень свободы стремится к бесконечности). Однако это не является обобщением критерия Фишера (там измеряется значимость отклонения одного к другому).
+
+В частности логарифмированное распределение Уилска аппроскимируется распределением $\chi^2$ (говорим ``аппроксимация'', когда то, что стремится к бесконечности стоит и слева, и справа):
+\begin{equation*}
+\Big ( \frac{p - \nu_A + 1}{2} - \nu_B \Big )\log \Lambda_p (\nu_A, \nu_B) \underset{\nu_B \rightarrow \infty}{\longrightarrow} \chi^2(\nu_A)
+\end{equation*}
+
+\paragraph{Частный случай, $p = 1$}
+
+$\Lambda_1 (\nu_A,\nu_B) = \frac{\chi^2(\nu_B)}{\chi^2(\nu_A)+\chi^2(\nu_B)}$ --- отношение вспомогательных случайных величин. Кроме того,
+\begin{equation*}
+\frac{(1 - \Lambda_1) / \nu_A}{\Lambda_1 / \nu_B} \sim F_{\nu_B,\nu_A}
+\end{equation*}

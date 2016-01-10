@@ -1,0 +1,49 @@
+\subsection{Билет 6. Проверка гипотезы о сравнении многомерных мат. ожиданий, независимые выборки}
+Пусть $\xi^{(1)}, \xi^{(2)} \in \R^p$  --- независимые. При этом вектор $\xi^{(1)}$ имеет длину $n_1$, а $\xi^{(2)}$ имеет длину $n_2$. Проверяем гипотезу:
+
+$H_0: \mathcal{E}\xi^{(1)} = \mathcal{E}\xi^{(2)}$.
+
+Пример: есть 2 группы людей. Снимаются показания по росту, весу, длине рук и т.д. Необходимо сравнить так называемые ``средние размеры''. Рассмотрим случаи:
+\begin{itemize}
+\item $\Sigma_1 = \Sigma_2 = \Sigma$ --- известна. Тогда статистика критерия имеет вид:
+%
+\begin{equation*}
+t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\Sigma (\frac{1}{n_1} + \frac{1}{n_2}) \Big )^{-1} (\bar{x}^{(1)} - \bar{x}^{(2)}) \sim \chi^2 (p),
+\end{equation*}
+%
+где $\xi^{(i)} \sim \mathcal{N}_p (\mu,\Sigma)$ (иначе, асимптотически), $(\bar{x}^{(1)} - \bar{x}^{(2)})$ --- расстояние Махаланобиса (от этой разности до 0), $\Sigma = \cov \xi^{(i)}$ --- ковариационная матрица разности (но тут ковариационная матрица одинаковая для обеих выборок, поэтому в формуле такое выражение). Вообще говоря, $\cov \bar{x} = \frac{\Sigma}{n}$.
+\item $\Sigma_1 = \Sigma_2 = \Sigma$ --- неизвестна. Тогда берем pooled covariance matrix $\tilde{\mathbb{S}} = \frac{(n_1 - 1)\mathbb{S}^{(1)} + (n_2 - 1)\mathbb{S}^{(2)}}{n_1 + n_2 - 2}$, где $\mathbb{S}^{(1)}, \mathbb{S}^{(2)}$ --- выборочные ковариационные матрицы для векторов $\xi^{(1)}, \xi^{(2)}$, соответственно.
+Статистика критерия:
+%
+\begin{equation*}
+t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\tilde{\mathbb{S}} (\frac{1}{n_1} + \frac{1}{n_2}) \Big )^{-1} (\bar{x}^{(1)} - \bar{x}^{(2)}) \sim T_p^2 (p),
+\end{equation*}
+%
+где $\xi^{(i)} \sim \mathcal{N}_p (\mu,\Sigma)$ (иначе, асимптотически).
+\item Неизвестно, что $\Sigma_1 = \Sigma_2$.
+Статистика критерия:
+%
+\begin{equation*}
+t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\frac{\tilde{\mathbb{S}}_1}{n_1} + \frac{\tilde{\mathbb{S}}_2}{n_2} \Big )^{-1} (\bar{x}^{(1)} - \bar{x}^{(2)}) \xrightarrow[n_1, n_2 \rightarrow \infty]{\sim} T_p^2 (p),
+\end{equation*}
+%
+где $\mathbb{S}_1, \mathbb{S}_2$ --- pooled covariance matrices для каждого вектора.
+\end{itemize}
+\subsection{Билет 7. Для чего используется статистика Box's M?}
+\paragraph{Гипотеза о равенстве ковариационных матриц}
+$\xi^{(i)} \in \R^{p}, \xi^{(i)} \sim \mathcal{N}_p (\mu_i, \Sigma_i), i = 1, \dots, k$. Проверяем гипотезу (о гомостохастичности):
+$H_0: \Sigma_1 = \dots = \Sigma_k$.
+Есть $k$ групп. Считаем несмещенные оценки ковариационных матриц, хотим проверить их равенство (критерий отнощения дисперсий, одномерный случай).
+%
+\begin{equation*}
+M = \Big (\frac{|\tilde{\mathbb{S}}_1|}{\tilde{\mathbb{S}}} \Big )^{\nu_1/2} \dots  \Big (\frac{|\tilde{\mathbb{S}}_k|}{\tilde{\mathbb{S}}} \Big )^{\nu_k/2},
+\end{equation*}
+%
+где $\nu_i = n_i - 1$ --- число степеней свободны, а $\tilde{\mathbb{S}} = \frac{(n_1 - 1)\tilde{\mathbb{S}}_1 + \cdots + (n_k - 1)\tilde{\mathbb{S}}_k}{n_1 + \cdots + n_k - k}$.
+
+Считаем статистику критерия (\underline{Box's statistics}):
+%
+\begin{equation*}
+t = - \log M
+\end{equation*}
+%

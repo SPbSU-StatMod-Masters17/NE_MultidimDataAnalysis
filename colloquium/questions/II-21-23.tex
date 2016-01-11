@@ -1,0 +1,49 @@
+% \documentclass[12pt,a4paper]{article}
+
+% \include{commons/packages/abstract}        % Подключаемые пакеты
+% \include{commons/styles/abstract}          % Пользовательские стили
+% \include{commons/commands/commands}  
+% \begin{document}
+
+
+\subsection{Билет 21. С чем совпадают дискриминантные функции и переменные, если ошибки сферические?}
+
+Пусть $\mathbb Y \in M_{n, p}\left(\mathbb R\right)$ --- матрица данных (строки $\mathbf y_i, i \in 1\mathbin : n$ -- наблюдения, столбцы $Y_j, j\in 1\mathbin p$ -- признаки), 
+наблюдения принадлежат к одной из $k$ групп, 
+в каждой группе $n_i$ наблюдений, $n = \sum_{i=1}^k n_i$. %%$\Tr{\left(abc\right)}$
+Матрица межгрупповых отклонений $\mathbb H = \sum_{i=1}^k n_i\left(\bar{\mathbf y}_i - \bar{\mathbf y}\right)\Tr{\left(\bar{\mathbf y}_i - \bar{\mathbf y}\right)}$, 
+матрица внутригрупповых отклонений $\mathbb E = \sum_{i=1}^k\sum_{j=1}^{n_i} \left(\mathbf y_{ij} - \bar{\mathbf y}_i\right)\Tr{\mathbf y_{ij} - \bar{\mathbf y}_i}$.
+
+В случае, если $\mathbb E = \sigma^2\mathbb I$ (все группы сферические и одинакового размера), дискриминантные функции данных, т.е. $A_1, \ldots, A_s$ -- собственные вектора $\mathbb E^{-1}\mathbb H$, становятся собственными векторами матрицы $\sigma^2\mathbb H$. То есть дискриминантные функции являются собственными векторами матрицы межгрупповых ковариаций. Так они совпадают с главными направлениями в терминах анализа главных компонент, если каждую группу рассматривать как одного индивида (в АГК главные направления --- это собственные вектора ковариационной матрицы), а дискриминантные переменные $\mathbb Y A_i$ при такой постановке являются главными компонентами.
+
+\subsection{Билет 22. Как определить значимое число дискриминантных функций (размерность пространства, где группы различаются).}
+
+Модель дискриминантного анализа (на генеральном языке): $\xi$ -- дискретная с.в. с носителем $\left\lbrace A_i\right\rbrace_{i=1}^k$, $\eta = \eta_i$, если $\xi = A_i$. Определены матрицы
+$$\mathbb H = \mathrm E\left(\left(\mathrm E\left(\eta\middle\vert\xi\right) - \mathrm E\eta\right)\Tr{\left(\mathrm E\left(\eta\middle\vert\xi\right) - \mathrm E\eta\right)}\right) \in M_p\left(\R\right),$$
+$$\mathbb E = \mathrm E\left(\left(\eta - \mathrm E\left(\eta\middle\vert\xi\right)\right)\Tr{\left(\eta - \mathrm E\left(\eta\middle\vert\xi\right)\right)}\right) \in M_p\left(\R\right).$$
+
+Дискриминантные функции $A_1, \ldots, A_s$ --- это с.в. матрицы $\mathbb E^{-1} \mathbb H$, $s = \min\left\lbrace p, \nu_H \right\rbrace$.
+
+Для того, чтобы узнать, какие из функций являются значимыми, мы последовательно проверяем гипотезу $H_0$: <<дискриминантные функции $A_m, \ldots, A_s$ не описывают различия в данных>> для $m\in 1\mathbin : s$.  Мы можем позволить себе проверять её последовательно, так как знаем, что дискриминантные функции, будучи отсортированы по убыванию соответствующих собственных чисел, оказываются в порядке убывания качества объяснения различий (см. билет 2.13).
+
+Если $H_0$ верна, то $\mathrm{rk}\mathbb H = m - 1$, и (почему?) $$\Lambda'_m = \prod_{i=m}^s \frac{1}{1+\lambda_i} \sim \Lambda_p\left(\nu_H + (m-1), \nu_E - (m-1)\right).$$
+
+С помощью статистики $\Lambda'_m$ (lambda prime) мы для каждого $m$ можем проверить, незначимы ли эта и все последующие дискриминантные функции.
+
+\subsection{Билет 23. Почему канонические дискриминантные переменные получаются ортогональными.}
+Пусть $\mathbb Y \in M_{n, p}\left(\mathbb R\right)$ --- матрица данных (строки $\mathbf y_i, i \in 1\mathbin : n$ -- наблюдения, столбцы $Y_j, j\in 1\mathbin p$ -- признаки), 
+наблюдения принадлежат к одной из $k$ групп, 
+в каждой группе $n_i$ наблюдений, $n = \sum_{i=1}^k n_i$. %%$\Tr{\left(abc\right)}$
+Матрица межгрупповых отклонений $\mathbb H = \sum_{i=1}^k n_i\left(\bar{\mathbf y}_i - \bar{\mathbf y}\right)\Tr{\left(\bar{\mathbf y}_i - \bar{\mathbf y}\right)}$, 
+матрица внутригрупповых отклонений $\mathbb E = \sum_{i=1}^k\sum_{j=1}^{n_i} \left(\mathbf y_{ij} - \bar{\mathbf y}_i\right)\Tr{\mathbf y_{ij} - \bar{\mathbf y}_i}$.
+
+$A_1, \ldots, A_s$ --- собственные вектора $\mathbb E^{-1}\mathbb H$. Дискриминантные переменные --- вектора данных в новых коородинатах $Z_i = \mathbb Y A_i$.
+
+\begin{thm}
+$$\forall i \neq j \in 1\mathbin : s\; A_i \perp A_j$$
+\end{thm}
+\begin{proof}
+$\Inner{Z_i}{Z_j} = \Inner{\mathbb Y A_i}{\mathbb Y A_j} = \Tr{A_i}\Tr{\mathbb Y}\mathbb Y A_j = \Tr{A_i}\left(\mathbb H + \mathbb E\right) A_j = \Tr{A_i}\mathbb E\left(\mathbb I + \mathbb E^{-1}\mathbb H\right) A_j.$ Так~как $\forall \mathbb C \geq 0$ с с.~ч. $\lambda_1, \ldots, \lambda_s$ с.~ч. матрицы $\mathbb I + \mathbb C$ --- это $1 + \lambda_1, \ldots, 1+ \lambda_s$, а собственные вектора те же самые, $\left(\mathbb I + \mathbb E^{-1}\mathbb H\right) A_j = \left(1 + \lambda_j\right) A_j$ по определению собственного вектора. Так как собственные вектора разных с.ч. ортогональны, $\Inner{Z_i}{Z_j} = \left(1+\lambda_j\right)\Tr{A_i} A_j = 0$.
+\end{proof}
+
+% \end{document}

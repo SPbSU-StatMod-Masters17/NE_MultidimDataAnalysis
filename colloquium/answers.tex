@@ -1,9 +1,9 @@
 %!TEX program = xelatex
 \documentclass[12pt,a4paper]{article}
 
-\include{headers/packages}        % Подключаемые пакеты
-\include{headers/styles}          % Пользовательские стили
-\include{headers/commands}  
+\include{commons/packages/abstract}        % Подключаемые пакеты
+\include{commons/styles/abstract}          % Пользовательские стили
+\include{commons/commands/commands}  
 
 \newcommand{\Header}{
   \pagestyle{empty}
@@ -22,13 +22,22 @@
 
 
 \begin{document}
-    \Header{}
-    \input{questions/01-07}
-    \input{questions/08-14}
-    \input{questions/15-21}
-    \input{questions/22-28}
-    \input{questions/29-35}
-    \input{questions/36-42}
-    \input{questions/47}
-    \input{questions/48}
+     \Header{}
+     \section{Первая часть}
+     \input{questions/01-07}
+     \input{questions/08-14}
+     \input{questions/15-21}
+     \input{questions/22-28}
+     \input{questions/29-35}
+     \input{questions/36-42}
+     \input{questions/43-48}
+     \input{questions/47}
+     \input{questions/48}
+     \section{Вторая часть}
+     \input{questions/cancor}
+     \input{questions/II-10-12}
+     \input{questions/II-15-20}
+     \input{questions/II-01-03}
+     \input{questions/II-06-07}
+     \input{questions/II-13-14}
 \end{document}

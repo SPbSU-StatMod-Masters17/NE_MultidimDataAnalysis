@@ -1,0 +1,3 @@
+[submodule "colloquium/commons"]
+	path = colloquium/commons
+	url = git@github.com:SPbSU-StatMod-Masters17/commons.git

@@ -1,0 +1,50 @@
+\subsection{Билет 1. Распределение Уишарта, свойства}
+\begin{dfn}
+Пусть $\xi_1, \dots, \xi_m \in \mathbb{R}^p$ --- независимые; $\xi_i \in \mathcal{N}_{p} (0,\Sigma)$.
+Тогда $\eta = \eta_m = \sum \limits_{i = 1}^{m} \xi_i \xi_i^{\mathrm{T}}$ имеет \underline{распределение Уишарта}. 
+\end{dfn}
+\begin{design}
+$\eta_m \sim \mathcal{W}_p (\Sigma, m)$
+\end{design}
+\begin{prop}[1]
+Частный случай, $p = 1$.
+Случайная величина $\eta_m$ имеет распределение $\chi^2$ с точностью до нормировки:
+\begin{equation*}
+\frac{\eta_m}{\sigma^2} \sim \chi^2(m)
+\end{equation*}
+\end{prop}
+\begin{prop}[2]
+$\mathcal{E}\eta = m \cdot \Sigma$
+\end{prop}
+\begin{prop}[3]
+\begin{sug}
+Пусть $w \sim \mathcal{W}_p (\Sigma, m)$, $\C^{q \times p}$ --- матрица, $\rk \C = q$ (матрица полного ранга). Тогда $\C w \C^{\mathrm{T}} \sim \mathcal{W}_p (\Sigma, m)$
+\end{sug}
+\begin{proof}
+Следует из свойства нормального распределения: $\xi \sim \mathcal{N}(0,\Sigma) \then \C \xi \sim \mathcal{N}(0,\C \Sigma \C^{\mathrm{T}})$
+\end{proof}
+\begin{con}
+$w \sim \mathcal{W}_p (\Sigma, m)$. Какое распределение имеет диагональный элемент?
+\textbf{Условно (так писать не надо, для понимания):} $(\Sigma)_{ii} \chi^2 (m)$.
+Как это получить на самом деле?
+Берем вместо матрицы $\C$ вектор, где на нужном месте (элемент на диагонали, который нас интересует) стоит $1$: $\C = (0, \dots, 0, \underset{(i)}{1}, 0, \dots 0)$. В итоге получим распределение $\chi^2$ с соответствующей нормировкой.
+\end{con}
+\end{prop}
+\subsection{Билет 2. Pooled covariance matrix}
+
+\subsection{Билет 3. Распределение Hotelling'а, свойства}
+\begin{dfn}
+Пусть $w \sim \mathcal{W}_p (\Sigma, m)$, $\xi \sim \mathcal{N}(\mu,\Sigma)$. Тогда $T^2 = (\xi - \mu)^{\mathrm{T}} \Big ( \frac{w}{m} \Big )^{-1} (\xi - \mu)$ имеет \underline{распределение Хотеллинга с $m$ степенями свободы}.
+\end{dfn}
+\begin{design}
+$T^2 \sim T_p^2 (m)$
+\end{design}
+\begin{prop}[1]
+Частный случай, $p = 1$. $T_1^2 (m) = (t(m)^2)$ (обычный Стьюдент в квадрате).
+\end{prop}
+\begin{prop}[2]
+$\Big (\frac{m - p + 1}{p} \Big )T_p^2 (m) = F_{p,m-p+1}$. Без доказательства.
+\end{prop}
+\begin{prop}[3]
+$T_p^2 (m) \xrightarrow[m \rightarrow \infty]{\sim} \chi^2 (p)$.
+\end{prop}

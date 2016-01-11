@@ -16,7 +16,8 @@ t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\Sigma (\frac{1}{n_1} + \
 Статистика критерия:
 %
 \begin{equation*}
-t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\tilde{\mathbb{S}} (\frac{1}{n_1} + \frac{1}{n_2}) \Big )^{-1} (\bar{x}^{(1)} - \bar{x}^{(2)}) \sim T_p^2 (p),
+t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\tilde{\mathbb{S}} (\frac{1}{n_1} +
+\frac{1}{n_2}) \Big )^{-1} (\bar{x}^{(1)} - \bar{x}^{(2)}) \sim T_p^2 (n_1+n_2-2),
 \end{equation*}
 %
 где $\xi^{(i)} \sim \mathcal{N}_p (\mu,\Sigma)$ (иначе, асимптотически).
@@ -24,7 +25,9 @@ t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\tilde{\mathbb{S}} (\frac
 Статистика критерия:
 %
 \begin{equation*}
-t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\frac{\tilde{\mathbb{S}}_1}{n_1} + \frac{\tilde{\mathbb{S}}_2}{n_2} \Big )^{-1} (\bar{x}^{(1)} - \bar{x}^{(2)}) \xrightarrow[n_1, n_2 \rightarrow \infty]{\sim} T_p^2 (p),
+t = (\bar{x}^{(1)} - \bar{x}^{(2)})^{\mathrm{T}} \Big (\frac{\tilde{\mathbb{S}}_1}{n_1} +
+\frac{\tilde{\mathbb{S}}_2}{n_2} \Big )^{-1} (\bar{x}^{(1)} - \bar{x}^{(2)}) \xrightarrow[n_1, n_2
+\rightarrow \infty]{\sim} \xi^2 (p),
 \end{equation*}
 %
 где $\mathbb{S}_1, \mathbb{S}_2$ --- pooled covariance matrices для каждого вектора.

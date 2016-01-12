@@ -1,0 +1,46 @@
+\subsection{Билет 29. Почему линейный дискриминантный анализ называется линейным, а квадратичный --- квадратичным?}
+	\subsubsection{LDA} % (fold)
+	\label{ssub:lda}
+		Модель: $\xi$ -- дискретная с.в. с носителем $\left\lbrace A_i\right\rbrace_{i=1}^k$, $\eta \sim \mathcal N\left(\mu_i, \Sigma\right)$, если $\xi = A_i$. Тогда плотность $x$
+		$$p\left(x\middle\vert \xi = A_i\right) = \frac{1}{\left(2\pi\right)^{p/2}\left\vert\Sigma\right\vert^{1/2}} \exp\left(-\frac{1}{2}\Tr{\left(x - \mu_i\right)}\Sigma^{-1}\left(x - \mu_i\right)\right),$$
+		и классифицирующая функция $f_i\left(x\right) = \pi_i p\left(x\middle\vert \xi = A_i\right)$, где $\pi_i$ --- априорная вероятность наблюдения попасть в $i$-ю группу. Для упрощения вычислений можно переписать классифицирующую функцию как
+
+		$$g_i\left(x\right) = \log f_i\left(x\right) = \log \pi_i - \frac{1}{2}\log\left\vert\Sigma\right\vert -  \frac{1}{2}\Tr{\left(x - \mu_i\right)}\Sigma^{-1}\left(x - \mu_i\right) \longrightarrow -  \frac{1}{2}\Tr{\mu_i}\Sigma^{-1}\mu_i + \mu_i\Sigma^{-1} + \log\pi_i,$$
+
+		то есть классифицирующая функция является линейной по $x$.
+
+	% subsubsection lda (end)
+
+	\subsubsection{QDA} % (fold)
+	\label{ssub:qda}
+
+	Модель: $\xi$ -- дискретная с.в. с носителем $\left\lbrace A_i\right\rbrace_{i=1}^k$, $\eta \sim \mathcal N\left(\mu_i, \Sigma_i\right)$, если $\xi = A_i$. Тогда плотность $x$
+		$$p\left(x\middle\vert \xi = A_i\right) = \frac{1}{\left(2\pi\right)^{p/2}\left\vert\Sigma_i\right\vert^{1/2}} \exp\left(-\frac{1}{2}\Tr{\left(x - \mu_i\right)}\Sigma_i^{-1}\left(x - \mu_i\right)\right),$$
+		и классифицирующая функция $f_i\left(x\right) = \pi_i p\left(x\middle\vert \xi = A_i\right)$. Оставляем в классифицирующей функции только монотонность и члены, отличающиеся в разных группах:
+
+		$$g_i\left(x\right) = \log f_i\left(x\right) = \log \pi_i - \frac{1}{2}\log\left\vert\Sigma_i\right\vert -  \frac{1}{2}\Tr{\left(x - \mu_i\right)}\Sigma_i^{-1}\left(x - \mu_i\right),$$
+
+		получаем квардатично зависящую от $x$ классифицирующую функцию.
+
+	
+	% subsubsection qda (end)
+
+\subsection{Билет 30: Общий подход к классификации через апостериорные вероятности} % (fold)
+	Общая задача классификации: $\xi$ -- дискретная с.в. с носителем $\left\lbrace A_i\right\rbrace_{i=1}^k$, $\eta \sim \mathcal P_i$, если $\xi = A_i$. Класс $C_i = \left\lbrace\xi = A_i\right\rbrace$.  Чтобы классифицировать наблюдение $x$, необходимо найти 
+	$$\argmax\mathrm P\left(\xi\in A_i\middle\vert \eta = x\right) = \argmax\mathrm P\left(C_i\middle\vert x\right).$$
+
+	Пусть известны априорные вероятности принадлежности нового наблюдения к $i$-му классу $\pi_i = \mathrm P\left(C_i\right)$. Тогда апостериорные вероятности будут иметь вид $$f_i\left(x\right) = \mathrm P\left(C_i\middle\vert x\right) = \frac{\mathrm P\left(x\middle\vert C_i\right) \pi_i}{\sum_{j=1}^k \mathrm P\left(x\middle\vert C_j\right) \pi_j}. $$
+
+	Так как знаменатель у всех $f_i$ одинаковый, его можно отбросить, и итоговые классифицирующие функции будут выглядеть как $f_i\left(x\right) = \mathrm P\left(x\middle\vert C_i\right) \pi_i$.
+
+	Как выбрать априорные вероятности?
+
+	\begin{enumerate}
+		\item Равномерно, $\forall i \in 1\mathbin : k \; \pi_i = 1 \mathbin / k$.
+		\item По соотношениям в обучающей выборке: $\pi_i = n_i \mathbin / \sum_{j=1}^k n_j$.
+		\item На основе другой дополнительной информации о данных (результаты предыдущих исследований, etc.)
+	\end{enumerate}
+
+% subsection _30_ (end)
+
+	
